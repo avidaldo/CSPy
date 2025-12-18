@@ -74,18 +74,18 @@ if __name__ == "__main__":
     print("Running basic tests...")
     test_account = BankAccount("12345678A", "ES7620770024003102575766", 100.0)
     assert test_account.balance == 100.0
-    
+
     test_account.deposit(50.0)
     assert test_account.balance == 150.0
-    
+
     test_account.withdraw(20.0)
     assert test_account.balance == 130.0
-    
+
     try:
         test_account.withdraw(1000.0)
         print("Test failed: Should have raised InsufficientFundsError")
         exit()
     except InsufficientFundsError:
         pass # Expected
-        
+
     print("All basic tests passed.")
