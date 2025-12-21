@@ -1,156 +1,157 @@
 """
-Versión 3: Modular
+Version 3: Modular
 ==================
-La validación está en un módulo separado (validators.py).
-Ahora incluye validación completa de IBAN con checksum MOD-97.
+Validation is in a separate module (validators.py).
+Now includes full IBAN validation with MOD-97 checksum.
 
-Mejoras respecto a v2:
-- Mejor organización: validaciones en su propio módulo
-- Validación completa de IBAN (no solo formato)
-- El módulo validators se puede reutilizar en otros proyectos
-- Aplicación del principio DRY (Don't Repeat Yourself)
+Improvements over v2:
+- Better organization: validations in their own module
+- Full IBAN validation (not just format)
+- The validators module can be reused in other projects
+- DRY (Don't Repeat Yourself) principle application
 """
 from validators import validate_iban, validate_positive_amount
 
 # ====================
-# EXCEPCIONES
+# EXCEPTIONS
 # ====================
 
 
 class InsufficientFundsError(Exception):
-    """Se lanza cuando no hay fondos suficientes para una operación."""
+    """Raised when there are insufficient funds for an operation."""
     pass
 
 
 # ====================
-# CLASE PRINCIPAL
+# MAIN CLASS
 # ====================
 
 
 class BankAccount:
     """
-    Cuenta bancaria identificada por IBAN.
+    Bank account identified by IBAN.
     
-    Versión modular: usa un módulo externo para validaciones.
-    La validación de IBAN ahora incluye verificación de checksum.
+    Modular version: uses an external module for validations.
+    IBAN validation now includes checksum verification.
     """
 
     def __init__(self, iban, initial_balance=0):
         """
-        Crea una nueva cuenta bancaria.
+        Creates a new bank account.
         
         Args:
-            iban: IBAN español válido (con checksum correcto)
-            initial_balance: Saldo inicial (por defecto 0)
+            iban: Valid Spanish IBAN (with correct checksum)
+            initial_balance: Initial balance (default 0)
         """
-        # Validación completa de IBAN (formato + checksum)
+        # Full IBAN validation (format + checksum)
         if not validate_iban(iban):
-            raise ValueError(f"IBAN inválido: {iban}")
+            raise ValueError(f"Invalid IBAN: {iban}")
 
         if initial_balance < 0:
-            raise ValueError("El saldo inicial no puede ser negativo")
+            raise ValueError("Initial balance cannot be negative")
 
         self._iban = iban
         self._balance = initial_balance
 
     @property
     def iban(self):
-        """Devuelve el IBAN de la cuenta."""
+        """Returns the account's IBAN."""
         return self._iban
 
     @property
     def balance(self):
-        """Devuelve el saldo actual."""
+        """Returns the current balance."""
         return self._balance
 
     def deposit(self, amount):
-        """Ingresa dinero en la cuenta."""
+        """Deposits money into the account."""
         if not validate_positive_amount(amount):
-            raise ValueError("La cantidad debe ser positiva")
+            raise ValueError("Amount must be positive")
 
         self._balance += amount
-        print(f"Ingreso: {amount:.2f}€. Nuevo saldo: {self._balance:.2f}€")
+        print(f"Deposit: {amount:.2f}€. New balance: {self._balance:.2f}€")
 
     def withdraw(self, amount):
-        """Retira dinero de la cuenta."""
+        """Withdraws money from the account."""
         if not validate_positive_amount(amount):
-            raise ValueError("La cantidad debe ser positiva")
+            raise ValueError("Amount must be positive")
 
         if amount > self._balance:
             raise InsufficientFundsError(
-                f"Fondos insuficientes. Saldo: {self._balance:.2f}€, "
-                f"Intento de retirada: {amount:.2f}€")
+                f"Insufficient funds. Balance: {self._balance:.2f}€, "
+                f"Withdrawal attempt: {amount:.2f}€")
 
         self._balance -= amount
-        print(f"Retirada: {amount:.2f}€. Nuevo saldo: {self._balance:.2f}€")
+        print(f"Withdrawal: {amount:.2f}€. New balance: {self._balance:.2f}€")
 
     def transfer(self, target_account, amount):
-        """Transfiere dinero a otra cuenta."""
+        """Transfers money to another account."""
         if not isinstance(target_account, BankAccount):
-            raise TypeError("La cuenta destino debe ser un BankAccount")
+            raise TypeError("Target account must be a BankAccount")
 
         self.withdraw(amount)
         target_account.deposit(amount)
-        print(f"Transferencia de {amount:.2f}€ a {target_account.iban}")
+        print(f"Transfer of {amount:.2f}€ to {target_account.iban}")
 
     def show(self):
-        """Muestra la información de la cuenta."""
+        """Shows account information."""
         print(f"IBAN: {self._iban}")
-        print(f"Saldo: {self._balance:.2f}€")
+        print(f"Balance: {self._balance:.2f}€")
 
 
 # ====================
-# EJEMPLO DE USO
+# USAGE EXAMPLE
 # ====================
 
 if __name__ == "__main__":
-    print("=== Versión 3: Modular ===\n")
+    print("=== Version 3: Modular ===\n")
 
-    # Ahora usamos IBANs válidos (con checksum correcto)
-    # Puedes generar IBANs de prueba en: https://www.generateiban.com/
+    # Now we use valid IBANs (with correct checksum)
+    # You can generate test IBANs at: https://www.generateiban.com/
     account1 = BankAccount("ES9121000418450200051332", 1000)
     account2 = BankAccount("ES7921000813610123456789", 500)
 
-    print("Cuenta 1:")
+    print("Account 1:")
     account1.show()
     print()
 
-    print("Cuenta 2:")
+    print("Account 2:")
     account2.show()
     print()
 
-    # Operaciones
-    print("--- Operaciones ---")
+    # Operations
+    print("--- Operations ---")
     account1.deposit(200)
     account1.withdraw(150)
     account1.transfer(account2, 100)
     print()
 
-    print("--- Estado final ---")
-    print("Cuenta 1:")
+    print("--- Final State ---")
+    print("Account 1:")
     account1.show()
     print()
-    print("Cuenta 2:")
+    print("Account 2:")
     account2.show()
     print()
 
-    # Pruebas de validación
-    print("--- Validación ---")
+    # Validation tests
+    print("--- Validation ---")
 
-    # IBAN con formato correcto pero checksum incorrecto
+    # IBAN with correct format but incorrect checksum
     try:
         invalid = BankAccount("ES1234567890123456789012", 100)
     except ValueError as e:
-        print(f"✓ Detectado IBAN con checksum incorrecto: {e}")
+        print(f"✓ Detected IBAN with incorrect checksum: {e}")
 
-    # IBAN con formato incorrecto
+    # IBAN with incorrect format
     try:
         invalid2 = BankAccount("ES123", 100)
     except ValueError as e:
-        print(f"✓ Detectado IBAN con formato incorrecto: {e}")
+        print(f"✓ Detected IBAN with incorrect format: {e}")
 
-    # Fondos insuficientes
+    # Insufficient funds
     try:
         account1.withdraw(10000)
     except InsufficientFundsError as e:
-        print(f"✓ Control de fondos: {e}")
+        print(f"✓ Funds control: {e}")
+

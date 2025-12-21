@@ -1,269 +1,269 @@
-# Comparación Rápida: v1 vs v2 vs v3 vs v4
+# Quick Comparison: v1 vs v2 vs v3 vs v4
 
-## Tabla de Decisión Rápida
+## Quick Decision Table
 
-| Criterio | v1 | v2 | v3 | v4 | Recomendación |
-|----------|----|----|----|----|---------------|
-| **Líneas de código total** | <150 | <200 | <500 | >500 | Empieza v1, evoluciona según crezca |
-| **Número de archivos** | 1 | 1 | 2-3 | 4+ | Más archivos = mejor organización |
-| **Reutilización** | ❌ | ⚠️ | ✅ | ✅✅ | v3+ para código reutilizable |
-| **Trabajo en equipo** | ❌ | ⚠️ | ✅ | ✅✅ | v3+ para múltiples desarrolladores |
-| **Complejidad validación** | Básica | Básica | Completa | Completa | MOD-97 solo en v3+ |
-| **Tiempo implementación** | 30 min | 45 min | 1-2h | 2-3h | Más tiempo = mejor arquitectura |
-| **Facilidad de testing** | ❌ | ✅ | ✅✅ | ✅✅ | v2+ permite tests unitarios |
-| **Principios aplicados** | - | SoC | SoC+DRY | SoC+DRY+SRP | Más principios = código más limpio |
+| Criterion | v1 | v2 | v3 | v4 | Recommendation |
+|-----------|----|----|----|----|----------------|
+| **Total lines of code** | <150 | <200 | <500 | >500 | Start v1, evolve as it grows |
+| **Number of files** | 1 | 1 | 2-3 | 4+ | More files = better organization |
+| **Reusability** | ❌ | ⚠️ | ✅ | ✅✅ | v3+ for reusable code |
+| **Teamwork** | ❌ | ⚠️ | ✅ | ✅✅ | v3+ for multiple developers |
+| **Validation complexity** | Basic | Basic | Complete | Complete | MOD-97 only in v3+ |
+| **Implementation time** | 30 min | 45 min | 1-2h | 2-3h | More time = better architecture |
+| **Testability** | ❌ | ✅ | ✅✅ | ✅✅ | v2+ allows unit tests |
+| **Principles applied** | - | SoC | SoC+DRY | SoC+DRY+SRP | More principles = cleaner code |
 
-## Cuándo Usar Cada Versión
+## When to Use Each Version
 
-### ✅ Usa v1 si:
-- [ ] Estás prototipando rápido
-- [ ] Es un script de una sola vez
-- [ ] El código no superará 150 líneas
-- [ ] Solo tú trabajarás en esto
-- [ ] No necesitas reutilizar el código
+### ✅ Use v1 if:
+- [ ] You are prototyping quickly
+- [ ] It's a one-off script
+- [ ] Code will not exceed 150 lines
+- [ ] Only you will work on this
+- [ ] You don't need to reuse code
 
-### ✅ Usa v2 si:
-- [ ] Identificaste código duplicado en v1
-- [ ] Quieres separar lógica de validación
-- [ ] El código está entre 150-500 líneas
-- [ ] Quieres empezar a aplicar buenas prácticas
-- [ ] Aún es un proyecto pequeño/mediano
+### ✅ Use v2 if:
+- [ ] You identified duplicated code in v1
+- [ ] You want to separate validation logic
+- [ ] Code is between 150-500 lines
+- [ ] You want to start applying best practices
+- [ ] Still a small/medium project
 
-### ✅ Usa v3 si:
-- [ ] La validación es compleja (ej: MOD-97)
-- [ ] Quieres reutilizar validadores en otros proyectos
-- [ ] El proyecto tiene >500 líneas
-- [ ] Varias personas trabajan en el código
-- [ ] Necesitas organización clara
+### ✅ Use v3 if:
+- [ ] Validation is complex (e.g. MOD-97)
+- [ ] You want to reuse validators in other projects
+- [ ] Project has >500 lines
+- [ ] Several people work on the code
+- [ ] You need clear organization
 
-### ✅ Usa v4 si:
-- [ ] Tienes múltiples tipos de validaciones
-- [ ] El módulo de validación crece demasiado
-- [ ] Vas a distribuir esto como librería
-- [ ] Necesitas estructura escalable
-- [ ] Aplicas SOLID en serio
+### ✅ Use v4 if:
+- [ ] You have multiple types of validations
+- [ ] Validation module grows too much
+- [ ] You are distributing this as a library
+- [ ] You need scalable structure
+- [ ] You are applying SOLID seriously
 
-## Código Comparado
+## Code Comparison
 
-### Crear una cuenta
+### Creating an account
 
 ```python
 # v1
 account = BankAccount("ES9121000418450200051332", 1000)
-# Validación: solo formato (regex)
+# Validation: format only (regex)
 
 # v2
 account = BankAccount("ES9121000418450200051332", 1000)
-# Validación: solo formato (regex) pero en función separada
+# Validation: format only (regex) but in separate function
 
 # v3
 account = BankAccount("ES9121000418450200051332", 1000)
-# Validación: formato + checksum MOD-97
+# Validation: format + checksum MOD-97
 
 # v4
 account = BankAccount("ES9121000418450200051332", 1000)
-# Validación: formato + checksum MOD-97 (misma funcionalidad que v3)
+# Validation: format + checksum MOD-97 (same functionality as v3)
 ```
 
-**Diferencia clave v1/v2 vs v3/v4**: Solo v3 y v4 validan el checksum
+**Key difference v1/v2 vs v3/v4**: Only v3 and v4 validate checksum
 
-### Validar IBAN directamente
+### Valildate IBAN directly
 
 ```python
 # v1
-# ❌ No puedes - está dentro de la clase
-account = BankAccount(iban, balance)  # Solo aquí se valida
+# ❌ You can't - it's inside the class
+account = BankAccount(iban, balance)  # Only validated here
 
 # v2
-# ⚠️ Puedes pero limitado
+# ⚠️ You can but limited
 from bank import validate_iban_format
-if validate_iban_format("ES123"):  # Solo formato
+if validate_iban_format("ES123"):  # Format only
     ...
 
 # v3
-# ✅ Puedes y completo
+# ✅ You can - and complete
 from validators import validate_iban
-if validate_iban("ES9121000418450200051332"):  # Formato + checksum
+if validate_iban("ES9121000418450200051332"):  # Format + checksum
     ...
 
 # v4
-# ✅✅ Puedes, completo y organizado
+# ✅✅ You can - complete and organized
 from validators import validate_iban
-if validate_iban("ES9121000418450200051332"):  # Formato + checksum
+if validate_iban("ES9121000418450200051332"):  # Format + checksum
     ...
 ```
 
-### Añadir nueva validación (ej: DNI)
+### Adding new validation (e.g. DNI)
 
 ```python
 # v1
-# Añadir método en BankAccount
+# Add method in BankAccount
 class BankAccount:
     def _is_valid_dni(self, dni):
-        # ❌ Responsabilidad incorrecta
+        # ❌ Incorrect responsibility
 
 # v2
-# Añadir función global
+# Add global function
 def validate_dni(dni):
-    # ⚠️ Archivo crece
+    # ⚠️ File grows
 
 # v3
-# Añadir en validators.py
+# Add in validators.py
 def validate_dni(dni):
-    # ⚠️ Módulo crece
+    # ⚠️ Module grows
 
 # v4
-# Crear validators/dni.py
+# Create validators/dni.py
 def validate_dni(dni):
-    # ✅✅ Cada tipo su módulo
+    # ✅✅ Each type its own module
 ```
 
-## Importaciones
+## Imports
 
 ```python
 # v1
 import re
-# Todo interno
+# All internal
 
 # v2
 import re
-# Todo en el mismo archivo
+# All in same file
 
 # v3
 from validators import validate_iban, validate_positive_amount
-import re  # solo en validators.py
+import re  # only in validators.py
 
 # v4
 from validators import validate_iban, validate_positive_amount
-# validators/__init__.py gestiona las importaciones internas
+# validators/__init__.py manages internal imports
 ```
 
-## Estructura de Directorios
+## Directory Structure
 
 ```
 v1/
-└── bank.py                     (todo aquí)
+└── bank.py                     (everything here)
 
 v2/
-└── bank.py                     (funciones + clase)
+└── bank.py                     (functions + class)
 
 v3/
-├── validators.py               (todas las validaciones)
-└── bank.py                     (solo lógica bancaria)
+├── validators.py               (all validations)
+└── bank.py                     (only banking logic)
 
 v4/
 ├── validators/
-│   ├── __init__.py            (exporta funciones)
-│   ├── iban.py                (validación IBAN)
-│   └── amount.py              (validación cantidades)
-└── bank.py                     (solo lógica bancaria)
+│   ├── __init__.py            (exports functions)
+│   ├── iban.py                (IBAN validation)
+│   └── amount.py              (amount validation)
+└── bank.py                     (only banking logic)
 ```
 
-## Señales de que Necesitas Evolucionar
+## Signals You Need to Evolve
 
-### De v1 a v2
-🚨 Copias y pegas código de validación  
-🚨 La clase `BankAccount` tiene métodos que no son sobre "cuenta"  
-🚨 Quieres testear validación sin crear cuenta completa  
+### From v1 to v2
+🚨 You copy and paste validation code  
+🚨 `BankAccount` class has methods that aren't about "account"  
+🚨 You want to test validation without creating full account  
 
-### De v2 a v3
-🚨 El archivo supera 300-500 líneas  
-🚨 Necesitas validación compleja (MOD-97)  
-🚨 Quieres usar validadores en otro proyecto  
-🚨 Difícil encontrar funciones en el archivo  
+### From v2 to v3
+🚨 File exceeds 300-500 lines  
+🚨 You need complex validation (MOD-97)  
+🚨 You want to use validators in another project  
+🚨 Hard to find functions in file  
 
-### De v3 a v4
-🚨 El módulo `validators.py` supera 500 líneas  
-🚨 Tienes muchos tipos de validación diferentes  
-🚨 Quieres distribuir como librería  
-🚨 Necesitas subcategorías (iban, tarjeta, dni, email...)  
+### From v3 to v4
+🚨 `validators.py` module exceeds 500 lines  
+🚨 You have many different types of validations  
+🚨 You want to distribute as library  
+🚨 You need subcategories (iban, card, dni, email...)  
 
-## Ejemplos de IBANs para Probar
+## IBAN Examples to Test
 
 ```python
-# Válidos (formato + checksum correcto)
+# Valid (format + checksum correct)
 "ES9121000418450200051332"  # ✅ v1, v2, v3, v4
 "ES7921000813610123456789"  # ✅ v1, v2, v3, v4
 
-# Formato correcto pero checksum incorrecto
+# Correct format but incorrect checksum
 "ES1234567890123456789012"  # ✅ v1, v2 | ❌ v3, v4
 
-# Formato incorrecto
-"ES123"                      # ❌ Todas las versiones
-"FR1234567890123456789012"  # ❌ Todas (solo soportan ES)
+# Incorrect format
+"ES123"                      # ❌ All versions
+"FR1234567890123456789012"  # ❌ All (only ES supported)
 ```
 
-## Tests Que Deberían Pasar
+## Tests That Should Pass
 
 ```python
-# Todos deben pasar
+# All should pass
 assert BankAccount("ES9121000418450200051332", 1000)  # OK
 
-# v1, v2 pasan | v3, v4 fallan
+# v1, v2 pass | v3, v4 fail
 try:
     BankAccount("ES1234567890123456789012", 1000)
-    print("v1 o v2: acepta checksum incorrecto")
+    print("v1 or v2: accepts incorrect checksum")
 except ValueError:
-    print("v3 o v4: rechaza checksum incorrecto")
+    print("v3 or v4: rejects incorrect checksum")
 
-# Todas fallan
+# All fail
 try:
     BankAccount("ES123", 1000)
-    print("ERROR: debería fallar")
+    print("ERROR: should fail")
 except ValueError:
-    print("OK: formato inválido detectado")
+    print("OK: invalid format detected")
 ```
 
-## Complejidad del Código
+## Code Complexity
 
-### Cyclomatic Complexity (aproximado)
+### Cyclomatic Complexity (approximate)
 
-| Función/Método | v1 | v2 | v3 | v4 |
-|----------------|----|----|----|----|
+| Function/Method | v1 | v2 | v3 | v4 |
+|-----------------|----|----|----|----|
 | validate_iban | 2 | 2 | 8 | 8 |
 | BankAccount.__init__ | 4 | 4 | 3 | 3 |
-| Total módulo bank | 15 | 18 | 12 | 12 |
-| Total validación | - | - | 10 | 10 |
+| Total module bank | 15 | 18 | 12 | 12 |
+| Total validation | - | - | 10 | 10 |
 
-**Interpretación**: Complejidad individual baja, pero total distribuida mejor en v3/v4
+**Interpretation**: Low individual complexity, but total distributed better in v3/v4
 
-## Métricas de Mantenibilidad
+## Maintainability Metrics
 
-| Métrica | v1 | v2 | v3 | v4 |
-|---------|----|----|----|----|
-| Acoplamiento | Alto | Medio | Bajo | Muy Bajo |
-| Cohesión | Baja | Media | Alta | Muy Alta |
-| Testabilidad | Baja | Alta | Muy Alta | Muy Alta |
-| Reutilización | 0% | 30% | 80% | 95% |
-| Mantenibilidad | 40% | 60% | 80% | 90% |
+| Metric | v1 | v2 | v3 | v4 |
+|--------|----|----|----|----|
+| Coupling | High | Medium | Low | Very Low |
+| Cohesion | Low | Medium | High | Very High |
+| Testability | Low | High | Very High | Very High |
+| Reusability | 0% | 30% | 80% | 95% |
+| Maintainability | 40% | 60% | 80% | 90% |
 
-## Resumen: ¿Cuál Elegir?
-
-```
-Proyecto Personal Pequeño (<500 líneas)    → v1 o v2
-Proyecto Mediano (500-2000 líneas)         → v3
-Proyecto Grande (>2000 líneas)             → v4
-Librería para Distribuir                   → v4
-Aprendiendo arquitectura                   → Empieza v1, evoluciona a v4
-```
-
-## Tiempo de Desarrollo Estimado
+## Summary: Which One to Choose?
 
 ```
-v1: 30 minutos  (empezar rápido)
-v2: +15 minutos (refactorizar a funciones)
-v3: +1 hora     (crear módulo, implementar MOD-97)
-v4: +1 hora     (crear paquete, organizar submódulos)
+Small Personal Project (<500 lines)    → v1 or v2
+Medium Project (500-2000 lines)        → v3
+Large Project (>2000 lines)            → v4
+Library for Distribution               → v4
+Learning architecture                  → Start v1, evolve to v4
+```
 
-Total acumulado:
+## Estimated Development Time
+
+```
+v1: 30 minutes  (quick start)
+v2: +15 minutes (refactor to functions)
+v3: +1 hour     (create module, implement MOD-97)
+v4: +1 hour     (create package, organize submodules)
+
+Total cumulative:
 v1: 30 min
 v2: 45 min
 v3: 1h 45min
 v4: 2h 45min
 ```
 
-**Conclusión**: La inversión de tiempo vale la pena en proyectos grandes o reutilizables.
+**Conclusion**: Time investment pays off in large or reusable projects.
 
 ---
 
-**Usa esta tabla como referencia rápida al decidir cómo organizar tu código.**
+**Use this table as quick reference when deciding how to organize your code.**

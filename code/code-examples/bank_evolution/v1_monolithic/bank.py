@@ -1,142 +1,143 @@
 """
-Versión 1: Monolítica
+Version 1: Monolithic
 =====================
-Todo el código está en una clase. La validación de IBAN está dentro de la clase.
-Esto funciona para empezar, pero tiene problemas de organización.
+All code is in one class. IBAN validation is inside the class.
+This works for starting, but has organization problems.
 """
 import re
 
 
 class InsufficientFundsError(Exception):
-    """Se lanza cuando no hay fondos suficientes para una operación."""
+    """Raised when there are insufficient funds for an operation."""
     pass
 
 
 class BankAccount:
     """
-    Cuenta bancaria identificada por IBAN.
+    Bank account identified by IBAN.
     
-    Versión monolítica: toda la lógica está dentro de la clase,
-    incluyendo la validación de IBAN.
+    Monolithic version: all logic is inside the class,
+    including IBAN validation.
     """
 
     def __init__(self, iban, initial_balance=0):
         """
-        Crea una nueva cuenta bancaria.
+        Creates a new bank account.
         
         Args:
-            iban: IBAN español (ES + 22 dígitos)
-            initial_balance: Saldo inicial (por defecto 0)
+            iban: Spanish IBAN (ES + 22 digits)
+            initial_balance: Initial balance (default 0)
         """
-        # Validación inline - todo está dentro de la clase
+        # Inline validation - everything is inside the class
         if not self._is_valid_iban(iban):
-            raise ValueError(f"IBAN inválido: {iban}")
+            raise ValueError(f"Invalid IBAN: {iban}")
 
         if initial_balance < 0:
-            raise ValueError("El saldo inicial no puede ser negativo")
+            raise ValueError("Initial balance cannot be negative")
 
         self._iban = iban
         self._balance = initial_balance
 
     def _is_valid_iban(self, iban):
         """
-        Valida un IBAN español (formato básico).
-        Versión simple: solo comprueba el formato con regex.
+        Validates a Spanish IBAN (basic format).
+        Simple version: only checks format with regex.
         """
-        # Solo formato: ES + 22 dígitos
+        # Only format: ES + 22 digits
         pattern = r'^ES\d{22}$'
         return bool(re.match(pattern, iban))
 
     @property
     def iban(self):
-        """Devuelve el IBAN de la cuenta."""
+        """Returns the account's IBAN."""
         return self._iban
 
     @property
     def balance(self):
-        """Devuelve el saldo actual."""
+        """Returns the current balance."""
         return self._balance
 
     def deposit(self, amount):
-        """Ingresa dinero en la cuenta."""
+        """Deposits money into the account."""
         if amount <= 0:
-            raise ValueError("La cantidad debe ser positiva")
+            raise ValueError("Amount must be positive")
 
         self._balance += amount
-        print(f"Ingreso: {amount:.2f}€. Nuevo saldo: {self._balance:.2f}€")
+        print(f"Deposit: {amount:.2f}€. New balance: {self._balance:.2f}€")
 
     def withdraw(self, amount):
-        """Retira dinero de la cuenta."""
+        """Withdraws money from the account."""
         if amount <= 0:
-            raise ValueError("La cantidad debe ser positiva")
+            raise ValueError("Amount must be positive")
 
         if amount > self._balance:
             raise InsufficientFundsError(
-                f"Fondos insuficientes. Saldo: {self._balance:.2f}€, "
-                f"Intento de retirada: {amount:.2f}€")
+                f"Insufficient funds. Balance: {self._balance:.2f}€, "
+                f"Withdrawal attempt: {amount:.2f}€")
 
         self._balance -= amount
-        print(f"Retirada: {amount:.2f}€. Nuevo saldo: {self._balance:.2f}€")
+        print(f"Withdrawal: {amount:.2f}€. New balance: {self._balance:.2f}€")
 
     def transfer(self, target_account, amount):
-        """Transfiere dinero a otra cuenta."""
+        """Transfers money to another account."""
         if not isinstance(target_account, BankAccount):
-            raise TypeError("La cuenta destino debe ser un BankAccount")
+            raise TypeError("Target account must be a BankAccount")
 
-        # Retirar de esta cuenta
+        # Withdraw from this account
         self.withdraw(amount)
-        # Ingresar en la cuenta destino
+        # Deposit into target account
         target_account.deposit(amount)
-        print(f"Transferencia de {amount:.2f}€ a {target_account.iban}")
+        print(f"Transfer of {amount:.2f}€ to {target_account.iban}")
 
     def show(self):
-        """Muestra la información de la cuenta."""
+        """Shows account information."""
         print(f"IBAN: {self._iban}")
-        print(f"Saldo: {self._balance:.2f}€")
+        print(f"Balance: {self._balance:.2f}€")
 
 
 # ====================
-# EJEMPLO DE USO
+# USAGE EXAMPLE
 # ====================
 
 if __name__ == "__main__":
-    print("=== Versión 1: Monolítica ===\n")
+    print("=== Version 1: Monolithic ===\n")
 
-    # Crear cuentas
+    # Create accounts
     account1 = BankAccount("ES1234567890123456789012", 1000)
     account2 = BankAccount("ES9876543210987654321098", 500)
 
-    print("Cuenta 1:")
+    print("Account 1:")
     account1.show()
     print()
 
-    print("Cuenta 2:")
+    print("Account 2:")
     account2.show()
     print()
 
-    # Operaciones
-    print("--- Operaciones ---")
+    # Operations
+    print("--- Operations ---")
     account1.deposit(200)
     account1.withdraw(150)
     account1.transfer(account2, 100)
     print()
 
-    print("--- Estado final ---")
-    print("Cuenta 1:")
+    print("--- Final State ---")
+    print("Account 1:")
     account1.show()
     print()
-    print("Cuenta 2:")
+    print("Account 2:")
     account2.show()
     print()
 
-    # Pruebas de validación (usando asserts como en los notebooks de módulos)
-    print("--- Validación ---")
+    # Validation tests (using asserts as in module notebooks)
+    print("--- Validation ---")
     try:
-        invalid = BankAccount("ES123", 100)  # IBAN incorrecto
+        invalid = BankAccount("ES123", 100)  # Incorrect IBAN
     except ValueError as e:
-        print(f"✓ Validación correcta: {e}")
+        print(f"✓ Validation correct: {e}")
 
     try:
-        account1.withdraw(10000)  # Fondos insuficientes
+        account1.withdraw(10000)  # Insufficient funds
     except InsufficientFundsError as e:
-        print(f"✓ Control de fondos correcto: {e}")
+        print(f"✓ Funds control correct: {e}")
+

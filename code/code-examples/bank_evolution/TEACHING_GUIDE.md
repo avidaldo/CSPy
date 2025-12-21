@@ -1,123 +1,123 @@
-# Guía Pedagógica: Arquitectura Progresiva con IBAN
+# Pedagogical Guide: Progressive Architecture with IBAN
 
-## 🎓 Visión General del Material Creado
+## 🎓 Overview of Created Material
 
-Este material enseña evolución de arquitectura de software usando cuentas bancarias con validación IBAN como ejemplo práctico.
+This material teaches software architecture evolution using bank accounts with IBAN validation as a practical example.
 
-## 📂 Estructura Completa
+## 📂 Complete Structure
 
 ```
 CSPy/
 ├── code/
-│   ├── 04-oop_basics.ipynb                    ← Prerrequisito (ya existía)
+│   ├── 04-oop_basics.ipynb                    ← Prerequisite (already existed)
 │   ├── modules/
-│   │   └── 07_progressive_architecture.ipynb  ← NUEVO: Notebook principal
+│   │   └── 07_progressive_architecture.ipynb  ← NEW: Main notebook
 │   └── code-examples/
-│       └── bank_evolution/                    ← NUEVO: Ejemplos progresivos
-│           ├── README.md                      ← NUEVO: Guía de uso
+│       └── bank_evolution/                    ← NEW: Progressive examples
+│           ├── README.md                      ← NEW: Usage guide
 │           ├── v1_monolithic/
-│           │   └── bank.py                    ← Todo en una clase
+│           │   └── bank.py                    ← All in one class
 │           ├── v2_functional/
-│           │   └── bank.py                    ← Funciones separadas
+│           │   └── bank.py                    ← Separate functions
 │           ├── v3_modular/
-│           │   ├── bank.py                    ← Clase principal
-│           │   └── validators.py              ← Módulo de validación (con MOD-97)
+│           │   ├── bank.py                    ← Main class
+│           │   └── validators.py              ← Validation module (with MOD-97)
 │           └── v4_package/
-│               ├── bank.py                    ← Clase principal
-│               └── validators/                ← Paquete estructurado
+│               ├── bank.py                    ← Main class
+│               └── validators/                ← Structured package
 │                   ├── __init__.py
-│                   ├── iban.py                ← Validación IBAN
-│                   └── amount.py              ← Validación cantidades
+│                   ├── iban.py                ← IBAN validation
+│                   └── amount.py              ← Amount validation
 ```
 
-## 🎯 Objetivos Pedagógicos
+## 🎯 Pedagogical Objectives
 
-### Conceptos Enseñados
+### Concepts Taught
 
-1. **Evolución de Código**
-   - De monolítico a modular
-   - Cuándo y cómo refactorizar
-   - Señales de código que necesita organización
+1. **Code Evolution**
+   - From monolithic to modular
+   - When and how to refactor
+   - Signals of code needing organization
 
-2. **Principios de Arquitectura**
-   - **DRY** (Don't Repeat Yourself) - No duplicar código
-   - **SoC** (Separation of Concerns) - Separar responsabilidades
-   - **SRP** (Single Responsibility Principle) - Una responsabilidad por módulo
+2. **Architecture Principles**
+   - **DRY** (Don't Repeat Yourself) - Do not duplicate code
+   - **SoC** (Separation of Concerns) - Separate responsibilities
+   - **SRP** (Single Responsibility Principle) - One responsibility per module
 
-3. **Organización Python**
-   - Funciones vs métodos
-   - Módulos (.py files)
-   - Paquetes (directorios con __init__.py)
-   - Importaciones limpias
+3. **Python Organization**
+   - Functions vs methods
+   - Modules (.py files)
+   - Packages (directories with __init__.py)
+   - Clean imports
 
-4. **Validación Real**
-   - IBANs españoles (ES + 22 dígitos)
-   - Algoritmo MOD-97 para checksum
-   - Diferencia entre formato y validación completa
+4. **Real Validation**
+   - Spanish IBANs (ES + 22 digits)
+   - MOD-97 algorithm for checksum
+   - Difference between format and complete validation
 
-## 🚀 Flujo de Aprendizaje
+## 🚀 Learning Flow
 
-### Para Estudiantes
+### For Students
 
 ```
-1. Estudiar OOP Basics (04-oop_basics.ipynb)
-   └─> Entender clases, métodos, self
+1. Study OOP Basics (04-oop_basics.ipynb)
+   └─> Understand classes, methods, self
    
-2. Leer Progressive Architecture (07_progressive_architecture.ipynb)
-   └─> Ver evolución conceptual con ejemplos
+2. Read Progressive Architecture (07_progressive_architecture.ipynb)
+   └─> See conceptual evolution with examples
    
-3. Ejecutar versiones en orden (v1 → v2 → v3 → v4)
-   └─> Comparar código real
+3. Run versions in order (v1 → v2 → v3 → v4)
+   └─> Compare real code
    
-4. Aplicar en proyectos propios
-   └─> Reconocer cuándo refactorizar
+4. Apply in own projects
+   └─> Recognize when to refactor
 ```
 
-### Para Profesores
+### For Teachers
 
 ```
-Sesión 1: Introducción
-├─> Revisar conceptos OOP del notebook 04
-├─> Mostrar ejemplo v1 (todo junto)
-└─> Discutir: ¿Qué problemas ves?
+Session 1: Introduction
+├─> Review OOP concepts from notebook 04
+├─> Show example v1 (all together)
+└─> Discuss: What problems do you see?
 
-Sesión 2: Principio SoC
-├─> Introducir Separation of Concerns
-├─> Refactorizar v1 → v2 en vivo
-└─> Ejercicio: estudiantes identifican responsabilidades
+Session 2: SoC Principle
+├─> Introduce Separation of Concerns
+├─> Refactor v1 → v2 live
+└─> Exercise: students identify responsibilities
 
-Sesión 3: Módulos y DRY
-├─> Explicar MOD-97 (complejidad que justifica módulo)
-├─> Mostrar v3 con módulo separado
-└─> Ejercicio: crear validador de email en módulo
+Session 3: Modules and DRY
+├─> Explain MOD-97 (complexity justifying module)
+├─> Show v3 with separate module
+└─> Exercise: create email validator in module
 
-Sesión 4: Paquetes y SRP
-├─> Introducir Single Responsibility Principle
-├─> Mostrar v4 con estructura de paquete
-└─> Proyecto: refactorizar código propio
+Session 4: Packages and SRP
+├─> Introduce Single Responsibility Principle
+├─> Show v4 with package structure
+└─> Project: refactor own code
 ```
 
-## 💡 Casos de Uso por Versión
+## 💡 Use Cases by Version
 
-### v1 - Monolítica
-**Contexto**: Prototipo rápido de MVP
+### v1 - Monolithic
+**Context**: Quick MVP prototype
 
 ```python
-# Un solo archivo, validación básica
+# Single file, basic validation
 class BankAccount:
     def _is_valid_iban(self, iban):
         pattern = r'^ES\d{22}$'
         return bool(re.match(pattern, iban))
 ```
 
-**Ventajas**: Rápido, todo en un lugar
-**Desventajas**: Crece mal, no reutilizable
+**Pros**: Fast, everything in one place
+**Cons**: Scales poorly, not reusable
 
-### v2 - Funcional
-**Contexto**: Proyecto pequeño con lógica clara
+### v2 - Functional
+**Context**: Small project with clear logic
 
 ```python
-# Funciones separadas en el mismo archivo
+# Separate functions in same file
 def validate_iban_format(iban): ...
 def validate_positive_amount(amount): ...
 
@@ -126,71 +126,71 @@ class BankAccount:
         if not validate_iban_format(iban): ...
 ```
 
-**Ventajas**: Separación básica, testeable
-**Desventajas**: Todo en un archivo aún
+**Pros**: Basic separation, testable
+**Cons**: Still all in one file
 
 ### v3 - Modular
-**Contexto**: Proyecto mediano, validación compleja
+**Context**: Medium project, complex validation
 
 ```
 v3_modular/
-    validators.py  ← Módulo reutilizable con MOD-97
-    bank.py        ← Importa desde validators
+    validators.py  ← Reusable module with MOD-97
+    bank.py        ← Imports from validators
 ```
 
-**Ventajas**: Reutilizable, bien organizado
-**Desventajas**: Un módulo puede crecer mucho
+**Pros**: Reusable, well organized
+**Cons**: A module can grow a lot
 
-### v4 - Paquete
-**Contexto**: Proyecto grande, múltiples validaciones
+### v4 - Package
+**Context**: Large project, multiple validations
 
 ```
 v4_package/
     validators/
-        __init__.py    ← Exporta funciones principales
-        iban.py        ← Solo validación IBAN
-        amount.py      ← Solo validación cantidades
+        __init__.py    ← Exports main functions
+        iban.py        ← Only IBAN validation
+        amount.py      ← Only amount validation
     bank.py
 ```
 
-**Ventajas**: Escalable, SRP aplicado
-**Desventajas**: Más archivos (no es desventaja en proyectos grandes)
+**Pros**: Scalable, applied SRP
+**Cons**: More files (not a disadvantage in large projects)
 
-## 📊 Comparación Técnica
+## 📊 Technical Comparison
 
-### Líneas de Código
+### Lines of Code
 
-| Versión | Total | Validación | Lógica Banco |
-|---------|-------|------------|--------------|
+| Version | Total | Validation | Bank Logic |
+|---------|-------|------------|------------|
 | v1      | 150   | ~30 (inline) | 120        |
-| v2      | 180   | ~40 (funciones) | 140     |
-| v3      | 220   | 100 (módulo) | 120        |
-| v4      | 250   | 120 (paquete) | 130       |
+| v2      | 180   | ~40 (functions) | 140     |
+| v3      | 220   | 100 (module) | 120        |
+| v4      | 250   | 120 (package) | 130       |
 
-### Complejidad de Validación
+### Validation Complexity
 
-| Versión | Formato | Checksum | Algoritmo |
-|---------|---------|----------|-----------|
+| Version | Format | Checksum | Algorithm |
+|---------|--------|----------|-----------|
 | v1      | ✅ Regex | ❌      | -         |
 | v2      | ✅ Regex | ❌      | -         |
 | v3      | ✅ Regex | ✅      | MOD-97    |
 | v4      | ✅ Regex | ✅      | MOD-97    |
 
-## 🔍 Detalles Técnicos
+## 🔍 Technical Details
 
-### Validación IBAN MOD-97
+### IBAN MOD-97 Validation
 
-El algoritmo completo (implementado en v3 y v4):
+The complete algorithm (implemented in v3 and v4):
 
 ```python
 def validate_iban_checksum(iban):
     # ES9121000418450200051332
     
-    # 1. Mover primeros 4 caracteres al final
+    # 1. Move first 4 characters to the end
     # → 21000418450200051332ES91
     rearranged = iban[4:] + iban[:4]
     
-    # 2. Convertir letras a números (E=14, S=28)
+    # 2. Convert letters to numbers (E=14, S=28)
     # → 210004184502000513321428 91
     numeric = ""
     for char in rearranged:
@@ -199,12 +199,12 @@ def validate_iban_checksum(iban):
         else:
             numeric += str(ord(char) - ord('A') + 10)
     
-    # 3. MOD 97 debe ser 1
+    # 3. MOD 97 must be 1
     # → int(numeric) % 97 == 1
     return int(numeric) % 97 == 1
 ```
 
-### Estructura de __init__.py (v4)
+### __init__.py Structure (v4)
 
 ```python
 # validators/__init__.py
@@ -214,86 +214,86 @@ from .amount import validate_positive_amount
 __all__ = ['validate_iban', 'validate_positive_amount']
 ```
 
-**Beneficio**: Importaciones limpias
+**Benefit**: Clean imports
 ```python
-# En vez de:
+# Instead of:
 from validators.iban import validate_iban
 
-# Podemos escribir:
+# We can write:
 from validators import validate_iban
 ```
 
-## 📝 Ejercicios Propuestos
+## 📝 Proposed Exercises
 
-### Básico
-1. Ejecuta cada versión y compara output
-2. Modifica el saldo inicial y prueba operaciones
-3. Intenta usar IBANs inválidos
+### Basic
+1. Run each version and compare output
+2. Modify initial balance and test operations
+3. Try using invalid IBANs
 
-### Intermedio
-4. Añade un método `get_formatted_iban()` que devuelva el IBAN con espacios
+### Intermediate
+4. Add a `get_formatted_iban()` method that returns IBAN with spaces
    - `ES9121000418450200051332` → `ES91 2100 0418 4502 0005 1332`
-5. Crea un validador de DNI español en v4
-6. Añade logging a las operaciones bancarias
+5. Create a Spanish DNI validator in v4
+6. Add logging to bank operations
 
-### Avanzado
-7. Extiende v4 para soportar IBANs de Francia (FR)
-8. Crea tests unitarios para cada validador
-9. Implementa un sistema de transacciones con historial
-10. Refactoriza tu propio proyecto usando estos patrones
+### Advanced
+7. Extend v4 to support French (FR) IBANs
+8. Create unit tests for each validator
+9. Implement a transaction system with history
+10. Refactor your own project using these patterns
 
-## 🎨 Principios SOLID Aplicados
+## 🎨 SOLID Principles Applied
 
-| Principio | Dónde | Cómo |
-|-----------|-------|------|
-| **S**ingle Responsibility | v4 | Cada módulo una responsabilidad |
-| **O**pen/Closed | v3, v4 | Extensible sin modificar |
-| **L**iskov Substitution | - | No aplicado (no hay herencia) |
-| **I**nterface Segregation | - | No aplicado (Python duck typing) |
-| **D**ependency Inversion | v3, v4 | BankAccount depende de interfaz validate_iban |
+| Principle | Where | How |
+|-----------|-------|-----|
+| **S**ingle Responsibility | v4 | Each module one responsibility |
+| **O**pen/Closed | v3, v4 | Extensible without modifying |
+| **L**iskov Substitution | - | Not applied (no inheritance) |
+| **I**nterface Segregation | - | Not applied (Python duck typing) |
+| **D**ependency Inversion | v3, v4 | BankAccount depends on validate_iban interface |
 
-## 🔗 Conexiones con Otros Notebooks
+## 🔗 Connections with Other Notebooks
 
-### Prerrequisitos
-- [03-functions.ipynb](../code/03-functions.ipynb) - Funciones, parámetros, return
-- [04-oop_basics.ipynb](../code/04-oop_basics.ipynb) - Clases, objetos, métodos
+### Prerequisites
+- [03-functions.ipynb](../code/03-functions.ipynb) - Functions, parameters, return
+- [04-oop_basics.ipynb](../code/04-oop_basics.ipynb) - Classes, objects, methods
 
-### Siguientes Pasos
-- `05_packages_and_structure.ipynb` - Profundizar en paquetes
-- `06_real_world_data_analysis.ipynb` - Aplicar en análisis de datos
+### Next Steps
+- `05_packages_and_structure.ipynb` - Deep dive into packages
+- `06_real_world_data_analysis.ipynb` - Apply in data analysis
 
-## 🚀 Implementación en Clase
+## 🚀 Class Implementation
 
-### Timing Sugerido (2 horas)
+### Suggested Timing (2 hours)
 
 ```
-0:00-0:15  Revisión OOP (notebook 04)
-0:15-0:30  Presentación v1 (problema)
-0:30-0:45  Evolución v1→v2 (SoC)
+0:00-0:15  OOP Review (notebook 04)
+0:15-0:30  Presentation v1 (problem)
+0:30-0:45  Evolution v1→v2 (SoC)
 0:45-1:00  Break
-1:00-1:20  Evolución v2→v3 (módulos + MOD-97)
-1:20-1:40  Evolución v3→v4 (paquetes)
-1:40-2:00  Ejercicio práctico + Q&A
+1:00-1:20  Evolution v2→v3 (modules + MOD-97)
+1:20-1:40  Evolution v3→v4 (packages)
+1:40-2:00  Practical Exercise + Q&A
 ```
 
-### Evaluación Sugerida
+### Suggested Evaluation
 
-**Quiz (10 puntos)**
-- Nombra 3 principios de arquitectura
-- ¿Cuándo usar módulos vs paquetes?
-- Explica el algoritmo MOD-97
+**Quiz (10 points)**
+- Name 3 architecture principles
+- When to use modules vs packages?
+- Explain the MOD-97 algorithm
 
-**Ejercicio Práctico (40 puntos)**
-- Refactoriza código dado de v1 a v3
-- Añade validador nuevo en v4
-- Explica decisiones de diseño
+**Practical Exercise (40 points)**
+- Refactor given v1 code to v3
+- Add new validator in v4
+- Explain design decisions
 
-**Proyecto (50 puntos)**
-- Refactoriza proyecto propio
-- Aplica al menos 2 principios
-- Documenta evolución
+**Project (50 points)**
+- Refactor own project
+- Apply at least 2 principles
+- Document evolution
 
-## 📚 Referencias Adicionales
+## 📚 Additional References
 
 - [PEP 8](https://peps.python.org/pep-0008/) - Style Guide
 - [Python Module Documentation](https://docs.python.org/3/tutorial/modules.html)
@@ -302,6 +302,6 @@ from validators import validate_iban
 
 ---
 
-**Creado**: Diciembre 2025  
-**Autor**: Material didáctico para CSPy  
-**Versión**: 1.0
+**Created**: December 2025  
+**Author**: Educational Material for CSPy  
+**Version**: 1.0

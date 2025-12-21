@@ -1,15 +1,15 @@
-# Cuaderno de Ejercicios: Arquitectura Progresiva
+# Exercises Notebook: Progressive Architecture
 
-## 📝 Instrucciones Generales
+## 📝 General Instructions
 
-Este cuaderno contiene ejercicios prácticos para aplicar lo aprendido sobre arquitectura de código. Completa los ejercicios en orden, ya que cada uno construye sobre el anterior.
+This notebook contains practical exercises to apply what you've learned about code architecture. Complete the exercises in order, as each one builds upon the previous one.
 
 ---
 
-## Ejercicio 1: Análisis de Código (15 min)
+## Exercise 1: Code Analysis (15 min)
 
-### Tarea
-Analiza el siguiente código y responde las preguntas:
+### Task
+Analyze the following code and answer the questions:
 
 ```python
 class UserManager:
@@ -17,85 +17,85 @@ class UserManager:
         self.users = []
     
     def add_user(self, email, password):
-        # Validar email
+        # Validate email
         if "@" not in email or "." not in email.split("@")[1]:
-            raise ValueError("Email inválido")
+            raise ValueError("Invalid email")
         
-        # Validar contraseña
+        # Validate password
         if len(password) < 8:
-            raise ValueError("Contraseña muy corta")
+            raise ValueError("Password too short")
         if not any(c.isupper() for c in password):
-            raise ValueError("Contraseña sin mayúscula")
+            raise ValueError("Password missing uppercase")
         if not any(c.isdigit() for c in password):
-            raise ValueError("Contraseña sin número")
+            raise ValueError("Password missing digit")
         
-        # Guardar
+        # Save
         self.users.append({"email": email, "password": password})
     
     def send_welcome_email(self, email):
-        # Simular envío de email
-        print(f"Enviando email de bienvenida a {email}")
+        # Simulate email sending
+        print(f"Sending welcome email to {email}")
 ```
 
-### Preguntas
+### Questions
 
-1. **¿Qué principios arquitectónicos se violan?**
+1. **Which architectural principles are violated?**
    - [ ] DRY
    - [ ] SoC
    - [ ] SRP
-   - [ ] Todos los anteriores
+   - [ ] All of the above
 
-2. **¿Cuál es el problema principal?**
+2. **What is the main problem?**
    
-   Tu respuesta:
+   Your answer:
    _________________________________________________________________
    _________________________________________________________________
 
-3. **¿Qué versión de arquitectura es esto (v1, v2, v3, v4)?**
+3. **Which architecture version is this (v1, v2, v3, v4)?**
    
-   Respuesta: _______________
+   Answer: _______________
 
-4. **¿A qué versión debería evolucionar primero?**
+4. **To which version should it evolve first?**
    
-   Respuesta: _______________
+   Answer: _______________
 
 ---
 
-## Ejercicio 2: Refactorización a v2 (20 min)
+## Exercise 2: Refactoring to v2 (20 min)
 
-### Tarea
-Refactoriza el código del Ejercicio 1 aplicando arquitectura v2 (funcional).
+### Task
+Refactor the code from Exercise 1 applying v2 architecture (functional).
 
 ```python
-# Extrae las validaciones a funciones separadas
+# Extract validations to separate functions
 
 def validate_email(email):
-    """Valida formato de email."""
-    # TODO: Tu código aquí
+    """Validates email format."""
+    # TODO: Your code here
     pass
 
 
 def validate_password_length(password):
-    """Valida longitud mínima de contraseña."""
-    # TODO: Tu código aquí
+    """Validates minimum password length."""
+    # TODO: Your code here
     pass
 
 
 def validate_password_uppercase(password):
-    """Valida que tenga mayúscula."""
-    # TODO: Tu código aquí
+    """Validates uppercase presence."""
+    # TODO: Your code here
     pass
 
 
 def validate_password_digit(password):
-    """Valida que tenga dígito."""
-    # TODO: Tu código aquí
+    """Validates digit presence."""
+    # TODO: Your code here
     pass
 
 
 def validate_password(password):
-    """Validación completa de contraseña."""
-    # TODO: Usa las funciones anteriores
+    """Complete password validation."""
+    # TODO: Use the functions above
     pass
 
 
@@ -104,209 +104,209 @@ class UserManager:
         self.users = []
     
     def add_user(self, email, password):
-        # TODO: Usa las funciones de validación
+        # TODO: Use validation functions
         pass
     
     def send_welcome_email(self, email):
-        print(f"Enviando email de bienvenida a {email}")
+        print(f"Sending welcome email to {email}")
 ```
 
-### Auto-evaluación
-- [ ] Las funciones están separadas de la clase
-- [ ] Cada función hace una sola cosa
-- [ ] `add_user()` usa las funciones de validación
-- [ ] El código es más fácil de testear
+### Self-evaluation
+- [ ] Functions are separated from the class
+- [ ] Each function does one single thing
+- [ ] `add_user()` uses the validation functions
+- [ ] The code is easier to test
 
 ---
 
-## Ejercicio 3: Identificar Señales de Refactorización (10 min)
+## Exercise 3: Identifying Refactoring Signals (10 min)
 
-### Tarea
-Para cada caso, indica si necesitas refactorizar y a qué versión:
+### Task
+For each case, indicate if you need to refactor and to which version:
 
-| Caso | ¿Refactorizar? | ¿A qué versión? | ¿Por qué? |
-|------|----------------|-----------------|-----------|
-| Archivo con 100 líneas, una clase | | | |
-| Archivo con 600 líneas, muchas funciones | | | |
-| Módulo con 15 tipos de validaciones | | | |
-| Copias el mismo regex en 5 lugares | | | |
-| Quieres usar validadores en otro proyecto | | | |
+| Case | Refactor? | To which version? | Why? |
+|------|-----------|------------------|------|
+| File with 100 lines, one class | | | |
+| File with 600 lines, many functions | | | |
+| Module with 15 types of validations | | | |
+| You copy the same regex in 5 places | | | |
+| You want to use validators in another project | | | |
 
 ---
 
-## Ejercicio 4: Validador de DNI Español (30 min)
+## Exercise 4: Spanish DNI Validator (30 min)
 
-### Contexto
-El DNI español tiene este formato: 8 dígitos + 1 letra
-- Ejemplo: `12345678Z`
-- La letra se calcula: `resto de (número ÷ 23)` da el índice en `"TRWAGMYFPDXBNJZSQVHLCKE"`
+### Context
+Spanish DNI has this format: 8 digits + 1 letter
+- Example: `12345678Z`
+- The letter is calculated: `remainder of (number ÷ 23)` gives the index in `"TRWAGMYFPDXBNJZSQVHLCKE"`
 
-### Tarea
-Implementa un validador de DNI siguiendo la arquitectura v3 (modular).
+### Task
+Implement a DNI validator following v3 architecture (modular).
 
-#### Archivo: `validators.py`
+#### File: `validators.py`
 ```python
 def validate_dni_format(dni):
     """
-    Valida formato: 8 dígitos + 1 letra.
+    Validates format: 8 digits + 1 letter.
     
     Args:
-        dni: String con el DNI
+        dni: String with the DNI
     
     Returns:
-        bool: True si el formato es correcto
+        bool: True if format is correct
     
-    Ejemplos:
+    Examples:
         >>> validate_dni_format("12345678Z")
         True
         >>> validate_dni_format("123Z")
         False
     """
-    # TODO: Tu código aquí
+    # TODO: Your code here
     pass
 
 
 def validate_dni_letter(dni):
     """
-    Valida que la letra sea correcta según el algoritmo.
+    Validates that the letter is correct according to the algorithm.
     
     Args:
-        dni: String con DNI en formato válido
+        dni: String with DNI in valid format
     
     Returns:
-        bool: True si la letra es correcta
+        bool: True if the letter is correct
     
-    Algoritmo:
-        1. Extraer número (primeros 8 dígitos)
-        2. Calcular: resto de (número ÷ 23)
-        3. Usar índice en "TRWAGMYFPDXBNJZSQVHLCKE"
-        4. Comparar con la letra del DNI
+    Algorithm:
+        1. Extract number (first 8 digits)
+        2. Calculate: remainder of (number ÷ 23)
+        3. Use index in "TRWAGMYFPDXBNJZSQVHLCKE"
+        4. Compare with the DNI letter
     
-    Ejemplos:
+    Examples:
         >>> validate_dni_letter("12345678Z")
         True
     """
     LETTERS = "TRWAGMYFPDXBNJZSQVHLCKE"
-    # TODO: Tu código aquí
+    # TODO: Your code here
     pass
 
 
 def validate_dni(dni):
     """
-    Validación completa: formato + letra.
+    Complete validation: format + letter.
     
     Args:
-        dni: String con el DNI
+        dni: String with the DNI
     
     Returns:
-        bool: True si el DNI es válido
+        bool: True if the DNI is valid
     """
-    # TODO: Tu código aquí
+    # TODO: Your code here
     pass
 
 
-# Pruebas
+# Tests
 if __name__ == "__main__":
-    # Casos de prueba
-    assert validate_dni("12345678Z") == True  # TODO: Calcular DNI válido
-    assert validate_dni("12345678A") == False  # Letra incorrecta
-    assert validate_dni("123Z") == False  # Formato incorrecto
+    # Test cases
+    assert validate_dni("12345678Z") == True  # TODO: Calculate valid DNI
+    assert validate_dni("12345678A") == False  # Incorrect letter
+    assert validate_dni("123Z") == False  # Incorrect format
     
-    print("✓ Todas las pruebas pasaron")
+    print("✓ All tests passed")
 ```
 
-### Auto-evaluación
-- [ ] `validate_dni_format()` valida solo el formato
-- [ ] `validate_dni_letter()` valida el algoritmo de la letra
-- [ ] `validate_dni()` combina ambas validaciones
-- [ ] Los asserts pasan correctamente
+### Self-evaluation
+- [ ] `validate_dni_format()` validates only the format
+- [ ] `validate_dni_letter()` validates the letter algorithm
+- [ ] `validate_dni()` combines both validations
+- [ ] Asserts pass correctly
 
 ---
 
-## Ejercicio 5: Evolucionando a v4 (Paquete) (45 min)
+## Exercise 5: Evolving to v4 (Package) (45 min)
 
-### Tarea
-Convierte el código de los ejercicios 2 y 4 en un paquete v4.
+### Task
+Convert the code from exercises 2 and 4 into a v4 package.
 
-#### Estructura objetivo:
+#### Target structure:
 ```
 validators/
     __init__.py
-    email.py       ← Del ejercicio 2
-    password.py    ← Del ejercicio 2
-    dni.py         ← Del ejercicio 4
+    email.py       ← From exercise 2
+    password.py    ← From exercise 2
+    dni.py         ← From exercise 4
 ```
 
-### Paso 1: Crear `validators/email.py`
+### Step 1: Create `validators/email.py`
 ```python
-"""Validación de emails."""
+"""Email validation."""
 
 def validate_email_format(email):
-    """Valida formato básico de email."""
-    # TODO: Mover código del ejercicio 2
+    """Validates basic email format."""
+    # TODO: Move code from exercise 2
     pass
 
 
 def validate_email(email):
-    """Validación completa de email."""
+    """Complete email validation."""
     return validate_email_format(email)
 
 
 if __name__ == "__main__":
-    # Pruebas
+    # Tests
     assert validate_email("test@example.com") == True
     assert validate_email("invalid") == False
-    print("✓ Validación de email OK")
+    print("✓ Email validation OK")
 ```
 
-### Paso 2: Crear `validators/password.py`
+### Step 2: Create `validators/password.py`
 ```python
-"""Validación de contraseñas."""
+"""Password validation."""
 
 def validate_password_length(password, min_length=8):
-    """Valida longitud mínima."""
-    # TODO: Mover código del ejercicio 2
+    """Validates minimum length."""
+    # TODO: Move code from exercise 2
     pass
 
 
 def validate_password_uppercase(password):
-    """Valida presencia de mayúscula."""
-    # TODO: Mover código del ejercicio 2
+    """Validates uppercase presence."""
+    # TODO: Move code from exercise 2
     pass
 
 
 def validate_password_digit(password):
-    """Valida presencia de dígito."""
-    # TODO: Mover código del ejercicio 2
+    """Validates digit presence."""
+    # TODO: Move code from exercise 2
     pass
 
 
 def validate_password(password):
-    """Validación completa de contraseña."""
-    # TODO: Combinar validaciones
+    """Complete password validation."""
+    # TODO: Combine validations
     pass
 
 
 if __name__ == "__main__":
-    # Pruebas
+    # Tests
     assert validate_password("SecurePass1") == True
     assert validate_password("weak") == False
-    print("✓ Validación de contraseña OK")
+    print("✓ Password validation OK")
 ```
 
-### Paso 3: Crear `validators/dni.py`
+### Step 3: Create `validators/dni.py`
 ```python
-"""Validación de DNI español."""
+"""Spanish DNI validation."""
 
-# TODO: Copiar código del ejercicio 4
+# TODO: Copy code from exercise 4
 ```
 
-### Paso 4: Crear `validators/__init__.py`
+### Step 4: Create `validators/__init__.py`
 ```python
 """
-Paquete de validaciones.
+Validation package.
 
-Exporta las funciones principales de cada submódulo.
+Exports main functions from each submodule.
 """
 
 from .email import validate_email
@@ -320,31 +320,31 @@ __all__ = [
 ]
 ```
 
-### Paso 5: Probar el paquete
+### Step 5: Test the package
 ```python
 # test_validators.py
 from validators import validate_email, validate_password, validate_dni
 
-# Probar importaciones
-print("Probando email:", validate_email("test@example.com"))
-print("Probando password:", validate_password("SecurePass1"))
-print("Probando DNI:", validate_dni("12345678Z"))  # Ajustar DNI válido
+# Test imports
+print("Testing email:", validate_email("test@example.com"))
+print("Testing password:", validate_password("SecurePass1"))
+print("Testing DNI:", validate_dni("12345678Z"))  # Adjust valid DNI
 
-print("✓ Paquete funcionando correctamente")
+print("✓ Package working correctly")
 ```
 
-### Auto-evaluación
-- [ ] Estructura de directorios correcta
-- [ ] Cada submódulo funciona independientemente
-- [ ] `__init__.py` exporta correctamente
-- [ ] Las importaciones desde fuera funcionan
+### Self-evaluation
+- [ ] Directory structure is correct
+- [ ] Each submodule works independently
+- [ ] `__init__.py` exports correctly
+- [ ] External imports work
 
 ---
 
-## Ejercicio 6: Aplicación Real (60 min)
+## Exercise 6: Real Application (60 min)
 
-### Tarea
-Crea una aplicación de gestión de usuarios usando el paquete `validators` del ejercicio 5.
+### Task
+Create a user management application using the `validators` package from exercise 5.
 
 ```python
 # user_manager.py
@@ -353,198 +353,199 @@ from validators import validate_email, validate_password, validate_dni
 
 
 class InvalidUserDataError(Exception):
-    """Error cuando los datos del usuario son inválidos."""
+    """Error when user data is invalid."""
     pass
 
 
 class User:
-    """Representa un usuario del sistema."""
+    """Represents a system user."""
     
     def __init__(self, email, password, dni):
         """
-        Crea un nuevo usuario.
+        Creates a new user.
         
         Args:
-            email: Email del usuario
-            password: Contraseña
-            dni: DNI español
+            email: User email
+            password: User password
+            dni: Spanish DNI
         
         Raises:
-            InvalidUserDataError: Si algún dato es inválido
+            InvalidUserDataError: If any data is invalid
         """
-        # TODO: Validar cada campo usando el paquete validators
-        # TODO: Si todo es válido, guardar los atributos
+        # TODO: Validate each field using the validators package
+        # TODO: If all valid, save attributes
         pass
     
     def __str__(self):
-        # TODO: Retornar representación string del usuario
+        # TODO: Return string representation of user
         pass
 
 
 class UserManager:
-    """Gestiona una colección de usuarios."""
+    """Manages a collection of users."""
     
     def __init__(self):
         self.users = []
     
     def register_user(self, email, password, dni):
         """
-        Registra un nuevo usuario.
+        Registers a new user.
         
         Returns:
-            User: El usuario creado
+            User: The created user
         
         Raises:
-            InvalidUserDataError: Si los datos son inválidos
-            ValueError: Si el email ya existe
+            InvalidUserDataError: If data is invalid
+            ValueError: If email already exists
         """
-        # TODO: Verificar que el email no existe
-        # TODO: Crear usuario
-        # TODO: Añadir a la lista
-        # TODO: Retornar usuario
+        # TODO: Verify email does not exist
+        # TODO: Create user
+        # TODO: Add to list
+        # TODO: Return user
         pass
     
     def find_by_email(self, email):
         """
-        Busca un usuario por email.
+        Finds a user by email.
         
         Returns:
-            User o None
+            User or None
         """
-        # TODO: Buscar en self.users
+        # TODO: Search in self.users
         pass
     
     def list_all(self):
-        """Lista todos los usuarios."""
-        # TODO: Iterar y mostrar
+        """Lists all users."""
+        # TODO: Iterate and show
         pass
 
 
-# Programa principal
+# Main program
 if __name__ == "__main__":
     manager = UserManager()
     
-    # Caso 1: Registro exitoso
+    # Case 1: Successful registration
     try:
         user1 = manager.register_user(
             "alice@example.com",
             "SecurePass1",
-            "12345678Z"  # Ajustar DNI válido
+            "12345678Z"  # Adjust valid DNI
         )
-        print(f"✓ Usuario registrado: {user1}")
+        print(f"✓ User registered: {user1}")
     except (InvalidUserDataError, ValueError) as e:
         print(f"✗ Error: {e}")
     
-    # Caso 2: Email duplicado
+    # Case 2: Duplicate email
     try:
         user2 = manager.register_user(
-            "alice@example.com",  # Duplicado
+            "alice@example.com",  # Duplicate
             "AnotherPass1",
-            "87654321X"  # Ajustar DNI válido
+            "87654321X"  # Adjust valid DNI
         )
     except ValueError as e:
-        print(f"✓ Error esperado: {e}")
+        print(f"✓ Expected error: {e}")
     
-    # Caso 3: Datos inválidos
+    # Case 3: Invalid data
     try:
         user3 = manager.register_user(
-            "invalid-email",  # Inválido
-            "weak",  # Inválida
-            "123"  # Inválido
+            "invalid-email",  # Invalid
+            "weak",  # Invalid
+            "123"  # Invalid
         )
     except InvalidUserDataError as e:
-        print(f"✓ Error esperado: {e}")
+        print(f"✓ Expected error: {e}")
     
-    # Listar usuarios
-    print("\n--- Usuarios registrados ---")
+    # List users
+    print("\n--- Registered users ---")
     manager.list_all()
 ```
 
-### Auto-evaluación
-- [ ] La aplicación usa el paquete `validators`
-- [ ] Los errores se manejan correctamente
-- [ ] El código está bien organizado (SoC)
-- [ ] Cada clase tiene una responsabilidad (SRP)
+### Self-evaluation
+- [ ] Application uses `validators` package
+- [ ] Errors are handled correctly
+- [ ] Code is well organized (SoC)
+- [ ] Each class has one responsibility (SRP)
 
 ---
 
-## Ejercicio 7: Reflexión Final (15 min)
+## Exercise 7: Final Reflection (15 min)
 
-### Preguntas de reflexión
+### Reflection Questions
 
-1. **¿Qué ventajas tiene la arquitectura v4 sobre v1?**
+1. **What advantages does v4 architecture have over v1?**
    
-   Tu respuesta:
+   Your answer:
    _________________________________________________________________
-   _________________________________________________________________
-   _________________________________________________________________
-
-2. **¿Cuándo usarías v2 en lugar de v4?**
-   
-   Tu respuesta:
    _________________________________________________________________
    _________________________________________________________________
 
-3. **¿Qué principio te parece más importante y por qué?**
+2. **When would you use v2 instead of v4?**
    
-   Principio: ________________
-   
-   Por qué:
+   Your answer:
    _________________________________________________________________
    _________________________________________________________________
 
-4. **Describe un proyecto tuyo que se beneficiaría de refactorización:**
+3. **Which principle seems most important to you and why?**
    
-   Proyecto: ________________
+   Principle: ________________
    
-   Estado actual: ________________
+   Why:
+   _________________________________________________________________
+   _________________________________________________________________
+
+4. **Describe a project of yours that would benefit from refactoring:**
    
-   Versión objetivo: ________________
+   Project: ________________
    
-   Razón:
+   Current state: ________________
+   
+   Target version: ________________
+   
+   Reason:
    _________________________________________________________________
    _________________________________________________________________
 
 ---
 
-## 🎯 Soluciones y Respuestas
+## 🎯 Solutions and Answers
 
-*(Las soluciones se proporcionarán en una sesión de revisión)*
+*(Solutions will be provided in a review session)*
 
-### Criterios de evaluación
+### Evaluation Criteria
 
-**Ejercicio 1**: 10 puntos
-- Identificar violaciones: 5 pts
-- Explicar problema: 3 pts
-- Identificar versión: 2 pts
+**Exercise 1**: 10 points
+- Identify violations: 5 pts
+- Explain problem: 3 pts
+- Identify version: 2 pts
 
-**Ejercicio 2**: 20 puntos
-- Funciones correctas: 10 pts
-- Integración en clase: 5 pts
-- Código limpio: 5 pts
+**Exercise 2**: 20 points
+- Correct functions: 10 pts
+- Integration in class: 5 pts
+- Clean code: 5 pts
 
-**Ejercicio 3**: 10 puntos
-- Identificación correcta: 10 pts
+**Exercise 3**: 10 points
+- Correct identification: 10 pts
 
-**Ejercicio 4**: 25 puntos
-- Validación formato: 8 pts
-- Algoritmo letra: 12 pts
-- Pruebas: 5 pts
+**Exercise 4**: 25 points
+- Format validation: 8 pts
+- Letter algorithm: 12 pts
+- Tests: 5 pts
 
-**Ejercicio 5**: 20 puntos
-- Estructura paquete: 8 pts
-- Submódulos funcionan: 8 pts
-- `__init__.py` correcto: 4 pts
+**Exercise 5**: 20 points
+- Package structure: 8 pts
+- Submodules work: 8 pts
+- Correct `__init__.py`: 4 pts
 
-**Ejercicio 6**: 15 puntos
-- Uso del paquete: 5 pts
-- Manejo errores: 5 pts
-- Código organizado: 5 pts
+**Exercise 6**: 15 points
+- Package usage: 5 pts
+- Error handling: 5 pts
+- Organized code: 5 pts
 
-**Total**: 100 puntos
+**Total**: 100 points
 
 ---
 
-**Tiempo estimado total**: 3-4 horas
-**Nivel**: Intermedio
-**Prerrequisito**: Haber completado notebooks 04 (OOP) y 07 (Progressive Architecture)
+**Estimated total time**: 3-4 hours
+**Level**: Intermediate
+**Prerequisite**: Completed notebooks 04 (OOP) and 07 (Progressive Architecture)
+

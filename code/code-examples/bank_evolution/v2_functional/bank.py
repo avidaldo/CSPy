@@ -1,30 +1,30 @@
 """
-Versión 2: Funcional
-====================
-La validación se extrae a funciones independientes.
-Esto mejora la Separación de Responsabilidades (SoC).
+Version 2: Functional
+=====================
+Validation is extracted to independent functions.
+This improves Separation of Concerns (SoC).
 
-Mejoras respecto a v1:
-- Las funciones de validación pueden reutilizarse
-- La clase BankAccount es más simple y enfocada
-- Es más fácil probar las validaciones
+Improvements over v1:
+- Validation functions can be reused
+- BankAccount class is simpler and more focused
+- Testing validations is easier
 """
 import re
 
 # ====================
-# FUNCIONES DE VALIDACIÓN
+# VALIDATION FUNCTIONS
 # ====================
 
 
 def validate_iban_format(iban):
     """
-    Valida el formato de un IBAN español.
+    Validates the format of a Spanish IBAN.
     
     Args:
-        iban: String con el IBAN a validar
+        iban: String with the IBAN to validate
     
     Returns:
-        bool: True si el formato es correcto
+        bool: True if format is correct
     """
     pattern = r'^ES\d{22}$'
     return bool(re.match(pattern, iban))
@@ -32,154 +32,155 @@ def validate_iban_format(iban):
 
 def validate_positive_amount(amount):
     """
-    Valida que una cantidad sea positiva.
+    Validates that an amount is positive.
     
     Args:
-        amount: Cantidad a validar
+        amount: Amount to validate
     
     Returns:
-        bool: True si es positiva
+        bool: True if positive
     """
     return amount > 0
 
 
 # ====================
-# EXCEPCIONES
+# EXCEPTIONS
 # ====================
 
 
 class InsufficientFundsError(Exception):
-    """Se lanza cuando no hay fondos suficientes para una operación."""
+    """Raised when there are insufficient funds for an operation."""
     pass
 
 
 # ====================
-# CLASE PRINCIPAL
+# MAIN CLASS
 # ====================
 
 
 class BankAccount:
     """
-    Cuenta bancaria identificada por IBAN.
+    Bank account identified by IBAN.
     
-    Versión funcional: usa funciones externas para validación.
-    La clase se enfoca solo en la lógica de cuenta bancaria.
+    Functional version: uses external functions for validation.
+    The class focuses only on bank account logic.
     """
 
     def __init__(self, iban, initial_balance=0):
         """
-        Crea una nueva cuenta bancaria.
+        Creates a new bank account.
         
         Args:
-            iban: IBAN español (ES + 22 dígitos)
-            initial_balance: Saldo inicial (por defecto 0)
+            iban: Spanish IBAN (ES + 22 digits)
+            initial_balance: Initial balance (default 0)
         """
-        # Usa las funciones de validación externas
+        # Use external validation functions
         if not validate_iban_format(iban):
-            raise ValueError(f"IBAN inválido: {iban}")
+            raise ValueError(f"Invalid IBAN: {iban}")
 
         if initial_balance < 0:
-            raise ValueError("El saldo inicial no puede ser negativo")
+            raise ValueError("Initial balance cannot be negative")
 
         self._iban = iban
         self._balance = initial_balance
 
     @property
     def iban(self):
-        """Devuelve el IBAN de la cuenta."""
+        """Returns the account's IBAN."""
         return self._iban
 
     @property
     def balance(self):
-        """Devuelve el saldo actual."""
+        """Returns the current balance."""
         return self._balance
 
     def deposit(self, amount):
-        """Ingresa dinero en la cuenta."""
+        """Deposits money into the account."""
         if not validate_positive_amount(amount):
-            raise ValueError("La cantidad debe ser positiva")
+            raise ValueError("Amount must be positive")
 
         self._balance += amount
-        print(f"Ingreso: {amount:.2f}€. Nuevo saldo: {self._balance:.2f}€")
+        print(f"Deposit: {amount:.2f}€. New balance: {self._balance:.2f}€")
 
     def withdraw(self, amount):
-        """Retira dinero de la cuenta."""
+        """Withdraws money from the account."""
         if not validate_positive_amount(amount):
-            raise ValueError("La cantidad debe ser positiva")
+            raise ValueError("Amount must be positive")
 
         if amount > self._balance:
             raise InsufficientFundsError(
-                f"Fondos insuficientes. Saldo: {self._balance:.2f}€, "
-                f"Intento de retirada: {amount:.2f}€")
+                f"Insufficient funds. Balance: {self._balance:.2f}€, "
+                f"Withdrawal attempt: {amount:.2f}€")
 
         self._balance -= amount
-        print(f"Retirada: {amount:.2f}€. Nuevo saldo: {self._balance:.2f}€")
+        print(f"Withdrawal: {amount:.2f}€. New balance: {self._balance:.2f}€")
 
     def transfer(self, target_account, amount):
-        """Transfiere dinero a otra cuenta."""
+        """Transfers money to another account."""
         if not isinstance(target_account, BankAccount):
-            raise TypeError("La cuenta destino debe ser un BankAccount")
+            raise TypeError("Target account must be a BankAccount")
 
         self.withdraw(amount)
         target_account.deposit(amount)
-        print(f"Transferencia de {amount:.2f}€ a {target_account.iban}")
+        print(f"Transfer of {amount:.2f}€ to {target_account.iban}")
 
     def show(self):
-        """Muestra la información de la cuenta."""
+        """Shows account information."""
         print(f"IBAN: {self._iban}")
-        print(f"Saldo: {self._balance:.2f}€")
+        print(f"Balance: {self._balance:.2f}€")
 
 
 # ====================
-# EJEMPLO DE USO
+# USAGE EXAMPLE
 # ====================
 
 if __name__ == "__main__":
-    print("=== Versión 2: Funcional ===\n")
+    print("=== Version 2: Functional ===\n")
 
-    # Crear cuentas
+    # Create accounts
     account1 = BankAccount("ES1234567890123456789012", 1000)
     account2 = BankAccount("ES9876543210987654321098", 500)
 
-    print("Cuenta 1:")
+    print("Account 1:")
     account1.show()
     print()
 
-    print("Cuenta 2:")
+    print("Account 2:")
     account2.show()
     print()
 
-    # Operaciones
-    print("--- Operaciones ---")
+    # Operations
+    print("--- Operations ---")
     account1.deposit(200)
     account1.withdraw(150)
     account1.transfer(account2, 100)
     print()
 
-    print("--- Estado final ---")
-    print("Cuenta 1:")
+    print("--- Final State ---")
+    print("Account 1:")
     account1.show()
     print()
-    print("Cuenta 2:")
+    print("Account 2:")
     account2.show()
     print()
 
-    # Pruebas de validación
-    print("--- Validación ---")
+    # Validation tests
+    print("--- Validation ---")
 
-    # Ahora podemos probar las funciones directamente
+    # Now we can test functions directly
     assert validate_iban_format("ES1234567890123456789012") == True
     assert validate_iban_format("ES123") == False
     assert validate_positive_amount(100) == True
     assert validate_positive_amount(-50) == False
-    print("✓ Todas las validaciones pasaron")
+    print("✓ All validations passed")
 
     try:
         invalid = BankAccount("ES123", 100)
     except ValueError as e:
-        print(f"✓ Validación IBAN: {e}")
+        print(f"✓ IBAN Validation: {e}")
 
     try:
         account1.withdraw(10000)
     except InsufficientFundsError as e:
-        print(f"✓ Control de fondos: {e}")
+        print(f"✓ Funds control: {e}")
+

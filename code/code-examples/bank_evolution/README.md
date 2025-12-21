@@ -1,44 +1,44 @@
-# Evolución de Arquitectura Bancaria
+# Bank Architecture Evolution
 
-Este directorio contiene 4 versiones del mismo código de cuenta bancaria, mostrando cómo evoluciona la arquitectura desde código monolítico hasta una estructura profesional con paquetes.
+This directory contains 4 versions of the same bank account code, showing how architecture evolves from monolithic code to a professional structure with packages.
 
-## 📚 Material Didáctico
+## 📚 Educational Material
 
-**Notebook principal**: [`../modules/07_progressive_architecture.ipynb`](../modules/07_progressive_architecture.ipynb)
+**Main Notebook**: [`../modules/07_progressive_architecture.ipynb`](../modules/07_progressive_architecture.ipynb)
 
-Este notebook explica cada versión en detalle, introduciendo los principios de arquitectura limpia.
+This notebook explains each version in detail, introducing clean architecture principles.
 
-## 📁 Versiones
+## 📁 Versions
 
-### v1_monolithic/ - Todo en un archivo
-- ✅ Rápido de empezar
-- ❌ Código mezclado
-- ❌ Difícil de reutilizar
-- **Archivo**: `bank.py` (150 líneas)
+### v1_monolithic/ - All in one file
+- ✅ Quick to start
+- ❌ Mixed code
+- ❌ Hard to reuse
+- **File**: `bank.py` (150 lines)
 
-**Validación**: Solo formato IBAN con regex
+**Validation**: Format only (Regex)
 
-### v2_functional/ - Funciones separadas
-- ✅ Separación de responsabilidades (SoC)
-- ✅ Funciones testeables
-- ⚠️ Aún todo en un archivo
-- **Archivo**: `bank.py` (180 líneas)
+### v2_functional/ - Separate functions
+- ✅ Separation of Concerns (SoC)
+- ✅ Testable functions
+- ⚠️ Still all in one file
+- **File**: `bank.py` (180 lines)
 
-**Validación**: Solo formato IBAN con regex
+**Validation**: Format only (Regex)
 
-### v3_modular/ - Módulos separados
-- ✅ Código en múltiples archivos
-- ✅ Módulo reutilizable
-- ✅ Validación completa de IBAN (MOD-97)
-- **Archivos**: `bank.py`, `validators.py`
+### v3_modular/ - Separate modules
+- ✅ Code in multiple files
+- ✅ Reusable module
+- ✅ Complete IBAN validation (MOD-97)
+- **Files**: `bank.py`, `validators.py`
 
-**Validación**: Formato + checksum MOD-97
+**Validation**: Format + MOD-97 checksum
 
-### v4_package/ - Estructura de paquete
-- ✅ Arquitectura profesional
-- ✅ Máxima escalabilidad
-- ✅ Cada módulo una responsabilidad (SRP)
-- **Estructura**:
+### v4_package/ - Package structure
+- ✅ Professional architecture
+- ✅ Maximum scalability
+- ✅ Each module one responsibility (SRP)
+- **Structure**:
   ```
   validators/
       __init__.py
@@ -47,39 +47,39 @@ Este notebook explica cada versión en detalle, introduciendo los principios de 
   bank.py
   ```
 
-**Validación**: Formato + checksum MOD-97
+**Validation**: Format + MOD-97 checksum
 
-## 🎯 Principios Enseñados
+## 🎯 Principles Taught
 
-| Principio | Descripción | Aplicado en |
-|-----------|-------------|-------------|
+| Principle | Description | Applied in |
+|-----------|-------------|------------|
 | **DRY** | Don't Repeat Yourself | v2, v3, v4 |
 | **SoC** | Separation of Concerns | v2, v3, v4 |
 | **SRP** | Single Responsibility Principle | v4 |
 
-## 🚀 Cómo Usar
+## 🚀 How to Use
 
-### Ejecutar cada versión
+### Run each version
 
 ```bash
-# Versión 1
+# Version 1
 cd v1_monolithic
 python bank.py
 
-# Versión 2
+# Version 2
 cd v2_functional
 python bank.py
 
-# Versión 3
+# Version 3
 cd v3_modular
 python bank.py
 
-# Versión 4
+# Version 4
 cd v4_package
 python bank.py
 ```
 
-### Probar validadores independientemente
+### Test validators independently
 
 ```bash
 # v3
@@ -92,62 +92,62 @@ python -m validators.iban
 python -m validators.amount
 ```
 
-## 📖 Flujo de Aprendizaje Recomendado
+## 📖 Recommended Learning Flow
 
-1. **Lee** el [notebook de OOP](../04-oop_basics.ipynb) primero
-2. **Estudia** el [notebook de arquitectura progresiva](../modules/07_progressive_architecture.ipynb)
-3. **Ejecuta** cada versión en orden (v1 → v2 → v3 → v4)
-4. **Compara** los archivos para ver las diferencias
-5. **Aplica** estos principios en tus propios proyectos
+1. **Read** the [OOP notebook](../04-oop_basics.ipynb) first
+2. **Study** the [progressive architecture notebook](../modules/07_progressive_architecture.ipynb)
+3. **Run** each version in order (v1 → v2 → v3 → v4)
+4. **Compare** files to see differences
+5. **Apply** these principles in your own projects
 
-## 🔍 Diferencias Clave
+## 🔍 Key Differences
 
-### Importaciones
+### Imports
 
 ```python
-# v1: No hay importaciones internas
+# v1: No internal imports
 import re
 
-# v2: No hay importaciones internas
+# v2: No internal imports
 import re
 
-# v3: Importa desde módulo
+# v3: Import from module
 from validators import validate_iban
 
-# v4: Importa desde paquete
+# v4: Import from package
 from validators import validate_iban
-# (internamente: from validators.iban import validate_iban)
+# (internally: from validators.iban import validate_iban)
 ```
 
-### Validación IBAN
+### IBAN Validation
 
 ```python
-# v1, v2: Solo formato
+# v1, v2: Format only
 pattern = r'^ES\d{22}$'
 return bool(re.match(pattern, iban))
 
-# v3, v4: Formato + checksum MOD-97
+# v3, v4: Format + MOD-97 checksum
 def validate_iban(iban):
     return validate_iban_format(iban) and validate_iban_checksum(iban)
 ```
 
-## 💡 Casos de Uso
+## 💡 Use Cases
 
-| Versión | Cuándo Usar |
+| Version | When to Use |
 |---------|-------------|
-| v1 | Scripts rápidos, prototipos, <100 líneas |
-| v2 | Separar lógica, archivos <500 líneas |
-| v3 | Proyectos medianos, código reutilizable |
-| v4 | Proyectos grandes, librerías, múltiples colaboradores |
+| v1 | Quick scripts, prototypes, <100 lines |
+| v2 | Separate logic, files <500 lines |
+| v3 | Medium projects, reusable code |
+| v4 | Large projects, libraries, multiple collaborators |
 
-## 📝 Ejercicios Sugeridos
+## 📝 Suggested Exercises
 
-1. **Añade un nuevo validador** de DNI español en v4
-2. **Refactoriza** código monolítico tuyo usando estos patrones
-3. **Crea tests** para cada módulo de validación
-4. **Extiende** para soportar IBANs de otros países (FR, DE, IT)
+1. **Add a new validator** for Spanish DNI in v4
+2. **Refactor** your own monolithic code using these patterns
+3. **Create tests** for each validation module
+4. **Extend** to support other countries' IBANs (FR, DE, IT)
 
-## 🔗 Referencias
+## 🔗 References
 
 - [Notebook 04: OOP Basics](../04-oop_basics.ipynb)
 - [Notebook 07: Progressive Architecture](../modules/07_progressive_architecture.ipynb)

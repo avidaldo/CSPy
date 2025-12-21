@@ -1,114 +1,114 @@
-# Arquitectura Progresiva - Resumen Visual
+# Progressive Architecture - Visual Summary
 
-## 📖 El Viaje Completo
+## 📖 The Complete Journey
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│  PUNTO DE PARTIDA: Notebook 04 - OOP Basics                        │
-│  Ya sabes: clases, objetos, métodos, self                          │
+│  STARTING POINT: Notebook 04 - OOP Basics                          │
+│  You know: classes, objects, methods, self                         │
 └─────────────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────────────┐
-│  PREGUNTA: ¿Cómo organizo el código cuando crece?                  │
+│  QUESTION: How do I organize code when it grows?                   │
 └─────────────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────────────┐
-│  RESPUESTA: Notebook 07 - Progressive Architecture                 │
-│  + Ejemplos v1 → v2 → v3 → v4                                      │
+│  ANSWER: Notebook 07 - Progressive Architecture                    │
+│  + Examples v1 → v2 → v3 → v4                                      │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-## 🔄 Las 4 Versiones (Un Vistazo)
+## 🔄 The 4 Versions (At a Glance)
 
-### v1: MONOLÍTICA - "Empezamos simple"
+### v1: MONOLITHIC - "Start simple"
 ```python
 ┌─────────────────────────┐
-│ bank.py (1 archivo)     │
+│ bank.py (1 file)        │
 ├─────────────────────────┤
-│ • Excepciones           │
-│ • Clase BankAccount     │
+│ • Exceptions            │
+│ • Class BankAccount     │
 │   ├─ __init__           │
-│   ├─ _is_valid_iban ← Validación inline │
+│   ├─ _is_valid_iban ← Inline validation │
 │   ├─ deposit            │
 │   ├─ withdraw           │
 │   └─ transfer           │
 └─────────────────────────┘
 
-Problema: Todo mezclado, difícil de reutilizar
+Problem: All mixed, hard to reuse
 ```
 
-### v2: FUNCIONAL - "Separamos responsabilidades"
+### v2: FUNCTIONAL - "Separate responsibilities"
 ```python
 ┌─────────────────────────┐
-│ bank.py (1 archivo)     │
+│ bank.py (1 file)        │
 ├─────────────────────────┤
-│ FUNCIONES GLOBALES:     │
+│ GLOBAL FUNCTIONS:       │
 │ • validate_iban_format()│
 │ • validate_positive_amount() │
 │                         │
-│ EXCEPCIONES             │
+│ EXCEPTIONS              │
 │                         │
-│ CLASE BankAccount       │
-│   ├─ usa funciones ↑    │
+│ CLASS BankAccount       │
+│   ├─ uses functions ↑   │
 │   ├─ deposit            │
 │   └─ withdraw           │
 └─────────────────────────┘
 
-Mejora: SoC básico, pero aún un archivo
+Improvement: Basic SoC, but still one file
 ```
 
-### v3: MODULAR - "Validación compleja justifica módulo"
+### v3: MODULAR - "Complex validation justifies module"
 ```python
 ┌─────────────────────────┐  ┌─────────────────────────┐
 │ validators.py           │  │ bank.py                 │
 ├─────────────────────────┤  ├─────────────────────────┤
 │ • validate_iban_format()│←─│ from validators import  │
 │ • validate_iban_checksum│  │   validate_iban         │
-│   (MOD-97 completo!)    │  │                         │
+│   (complete MOD-97!)    │  │                         │
 │ • validate_iban()       │  │ class BankAccount:      │
-│ • validate_positive...  │  │   • usa validate_iban() │
+│ • validate_positive...  │  │   • uses validate_iban()│
 └─────────────────────────┘  └─────────────────────────┘
 
-Mejora: Módulo reutilizable, validación completa
+Improvement: Reusable module, complete validation
 ```
 
-### v4: PAQUETE - "Escalable y profesional"
+### v4: PACKAGE - "Scalable and professional"
 ```python
 ┌────────────────────────────┐  ┌─────────────────────────┐
 │ validators/                │  │ bank.py                 │
 ├────────────────────────────┤  ├─────────────────────────┤
-│ • __init__.py (exporta)    │←─│ from validators import  │
+│ • __init__.py (exports)    │←─│ from validators import  │
 │ • iban.py                  │  │   validate_iban         │
 │   ├─ validate_iban_format()│  │                         │
 │   ├─ validate_iban_checksum│  │ class BankAccount:      │
-│   └─ validate_iban()       │  │   • usa validate_iban() │
+│   └─ validate_iban()       │  │   • uses validate_iban()│
 │ • amount.py                │  └─────────────────────────┘
 │   └─ validate_positive...  │
-└────────────────────────────┘
+87: └────────────────────────────┘
 
-Mejora: SRP aplicado, cada módulo una cosa
+Improvement: Applied SRP, each module one thing
 ```
 
-## 📊 Evolución de Complejidad
+## 📊 Evolution of Complexity
 
 ```
-Validación de IBAN a través de las versiones:
+IBAN Validation across versions:
 
-v1, v2: FORMATO SOLO
+v1, v2: FORMAT ONLY
 ┌──────────────────────────┐
 │ pattern = r'^ES\d{22}$'  │
 │ return bool(match(iban)) │
 └──────────────────────────┘
-Simple regex ← Suficiente al principio
+Simple regex ← Sufficient at start
 
-v3, v4: FORMATO + CHECKSUM
+v3, v4: FORMAT + CHECKSUM
 ┌──────────────────────────────────────────────┐
 │ def validate_iban(iban):                     │
-│     # 1. Validar formato                     │
+│     # 1. Validate format                     │
 │     if not re.match(r'^ES\d{22}$', iban):    │
 │         return False                         │
 │                                              │
-│     # 2. Validar checksum MOD-97             │
+│     # 2. Validate MOD-97 checksum            │
 │     rearranged = iban[4:] + iban[:4]         │
 │     numeric = ""                             │
 │     for char in rearranged:                  │
@@ -117,153 +117,153 @@ v3, v4: FORMATO + CHECKSUM
 │         else:                                │
 │             numeric += str(ord(char) - 65 + 10) │
 │     return int(numeric) % 97 == 1            │
-└──────────────────────────────────────────────┘
-Algoritmo complejo ← Justifica módulo separado!
+120: └──────────────────────────────────────────────┘
+Complex algorithm ← Justifies separate module!
 ```
 
-## 🎯 Principios Aplicados
+## 🎯 Principles Applied
 
 ```
 ┌────────────┬─────────────────────────────────────────────────┐
-│ Principio  │ Cómo se Aplica                                  │
+│ Principle  │ How it Applies                                  │
 ├────────────┼─────────────────────────────────────────────────┤
-│ DRY        │ v2: Función validate_iban() en vez de copiar    │
-│            │ el regex en 3 lugares                           │
+│ DRY        │ v2: Function validate_iban() instead of copying │
+│            │ regex in 3 places                               │
 ├────────────┼─────────────────────────────────────────────────┤
-│ SoC        │ v2: Validación separada de lógica bancaria      │
-│            │ v3: Validación en su propio módulo              │
+│ SoC        │ v2: Validation separated from banking logic     │
+│            │ v3: Validation in its own module                │
 ├────────────┼─────────────────────────────────────────────────┤
-│ SRP        │ v4: iban.py solo valida IBANs                   │
-│            │     amount.py solo valida cantidades            │
-│            │     bank.py solo lógica bancaria                │
+│ SRP        │ v4: iban.py only validates IBANs                │
+│            │     amount.py only validates amounts            │
+│            │     bank.py only banking logic                  │
 └────────────┴─────────────────────────────────────────────────┘
 ```
 
-## 🚨 Señales de Refactorización
+## 🚨 Signals for Refactoring
 
 ```
-Estás en v1 → Considera v2 si:
-├─ Copias código (mismo regex en varios métodos)
-├─ La clase hace "demasiadas cosas"
-└─ Difícil de explicar qué hace un método
+You are in v1 → Consider v2 if:
+├─ You copy code (same regex in various methods)
+├─ The class does "too many things"
+└─ Hard to explain what a method does
 
-Estás en v2 → Considera v3 si:
-├─ El archivo supera 500 líneas
-├─ Quieres reutilizar funciones en otro proyecto
-└─ Necesitas validación compleja (MOD-97)
+You are in v2 → Consider v3 if:
+├─ The file exceeds 500 lines
+├─ You want to reuse functions in another project
+├─ You need complex validation (MOD-97)
 
-Estás en v3 → Considera v4 si:
-├─ Un módulo hace demasiadas cosas distintas
-├─ Necesitas jerarquía (subcategorías de validaciones)
-└─ Vas a distribuir como librería
+You are in v3 → Consider v4 if:
+├─ A module does too many different things
+├─ You need hierarchy (validation subcategories)
+└─ You are going to distribute as library
 ```
 
-## 📁 Archivos Creados (Checklist)
+## 📁 Files Created (Checklist)
 
 ```
 ✅ code/code-examples/bank_evolution/
-   ✅ README.md                    ← Guía de uso
-   ✅ TEACHING_GUIDE.md            ← Guía pedagógica completa
-   ✅ VISUAL_SUMMARY.md            ← Este archivo
+   ✅ README.md                    ← Usage guide
+   ✅ TEACHING_GUIDE.md            ← Complete pedagogical guide
+   ✅ VISUAL_SUMMARY.md            ← This file
    
    ✅ v1_monolithic/
-      ✅ bank.py                   ← Todo en uno
+      ✅ bank.py                   ← All in one
    
    ✅ v2_functional/
-      ✅ bank.py                   ← Funciones separadas
+      ✅ bank.py                   ← Separate functions
    
    ✅ v3_modular/
-      ✅ bank.py                   ← Clase principal
-      ✅ validators.py             ← Módulo con MOD-97
+      ✅ bank.py                   ← Main class
+      ✅ validators.py             ← Module with MOD-97
    
    ✅ v4_package/
-      ✅ bank.py                   ← Clase principal
+      ✅ bank.py                   ← Main class
       ✅ validators/
-         ✅ __init__.py            ← Exporta funciones
-         ✅ iban.py                ← Validación IBAN
-         ✅ amount.py              ← Validación cantidades
+         ✅ __init__.py            ← Exports functions
+         ✅ iban.py                ← IBAN validation
+         ✅ amount.py              ← Amount validation
 
 ✅ code/modules/
-   ✅ 07_progressive_architecture.ipynb  ← Notebook enseñanza
+   ✅ 07_progressive_architecture.ipynb  ← Teaching notebook
 
 ✅ code/04-oop_basics.ipynb
-   ✅ (Actualizado con referencia al nuevo material)
+   ✅ (Updated with reference to new material)
 ```
 
-## 🎓 Cómo Enseñar Esto
+## 🎓 How to Teach This
 
-### Sesión de 2 Horas
+### 2-Hour Session
 
 ```
 ┌────────────────┬──────────────────────────────────────────┐
-│ Tiempo         │ Actividad                                │
+│ Time           │ Activity                                 │
 ├────────────────┼──────────────────────────────────────────┤
-│ 00:00 - 00:15  │ Repaso: OOP del notebook 04              │
-│                │ - Clases, métodos, self                  │
+│ 00:00 - 00:15  │ Review: OOP from notebook 04             │
+│                │ - Classes, methods, self                 │
 ├────────────────┼──────────────────────────────────────────┤
-│ 00:15 - 00:30  │ v1: El problema del código monolítico    │
-│                │ - Mostrar bank.py                        │
-│                │ - Discutir: ¿Qué podría mejorar?         │
+│ 00:15 - 00:30  │ v1: The monolithic code problem          │
+│                │ - Show bank.py                           │
+│                │ - Discuss: What could be improved?       │
 ├────────────────┼──────────────────────────────────────────┤
-│ 00:30 - 00:45  │ v2: Separación de responsabilidades      │
-│                │ - Live coding: extraer funciones         │
-│                │ - Principio SoC                          │
+│ 00:30 - 00:45  │ v2: Separation of responsibilities       │
+│                │ - Live coding: extract functions         │
+│                │ - SoC Principle                          │
 ├────────────────┼──────────────────────────────────────────┤
 │ 00:45 - 01:00  │ ☕ Break                                  │
 ├────────────────┼──────────────────────────────────────────┤
-│ 01:00 - 01:20  │ v3: Módulos y validación compleja        │
-│                │ - Explicar MOD-97 (por qué necesitamos)  │
-│                │ - Mostrar validators.py                  │
-│                │ - Principio DRY                          │
+│ 01:00 - 01:20  │ v3: Modules and complex validation       │
+│                │ - Explain MOD-97 (why we need it)        │
+│                │ - Show validators.py                     │
+│                │ - DRY Principle                          │
 ├────────────────┼──────────────────────────────────────────┤
-│ 01:20 - 01:40  │ v4: Paquetes profesionales               │
-│                │ - Estructura de directorios              │
-│                │ - Rol de __init__.py                     │
-│                │ - Principio SRP                          │
+│ 01:20 - 01:40  │ v4: Professional packages                │
+│                │ - Directory structure                    │
+│                │ - Role of __init__.py                    │
+│                │ - SRP Principle                          │
 ├────────────────┼──────────────────────────────────────────┤
-│ 01:40 - 02:00  │ Ejercicio: Refactoriza tu código         │
+│ 01:40 - 02:00  │ Exercise: Refactor your code             │
 │                │ + Q&A                                    │
 └────────────────┴──────────────────────────────────────────┘
 ```
 
-## 💻 Comandos Rápidos
+## 💻 Quick Commands
 
 ```bash
-# Ejecutar todas las versiones de golpe
+# Run all versions at once
 cd code/code-examples/bank_evolution
 python v1_monolithic/bank.py
 python v2_functional/bank.py
 python v3_modular/bank.py
 python v4_package/bank.py
 
-# Probar validadores independientemente
+# Test validators independently
 python v3_modular/validators.py
 python -m v4_package.validators.iban
 python -m v4_package.validators.amount
 ```
 
-## 🔗 Referencias Rápidas
+## 🔗 Quick References
 
-| Quieres...                     | Mira...                           |
+| You want to...                 | Look at...                        |
 |--------------------------------|-----------------------------------|
-| Entender conceptos             | `07_progressive_architecture.ipynb` |
-| Ver código real                | Carpetas `v1/`, `v2/`, `v3/`, `v4/` |
-| Guía de uso                    | `README.md`                       |
-| Guía de enseñanza              | `TEACHING_GUIDE.md`               |
-| Resumen visual                 | `VISUAL_SUMMARY.md` (este)        |
-| Prerrequisito OOP              | `../04-oop_basics.ipynb`          |
+| Understand concepts            | `07_progressive_architecture.ipynb` |
+| See real code                  | Folders `v1/`, `v2/`, `v3/`, `v4/` |
+| Usage guide                    | `README.md`                       |
+| Teaching guide                 | `TEACHING_GUIDE.md`               |
+| Visual summary                 | `VISUAL_SUMMARY.md` (this)        |
+| OOP Prerequisite               | `../04-oop_basics.ipynb`          |
 
-## 🎉 Resultado Final
+## 🎉 Final Result
 
-Los estudiantes aprenderán:
+Students will learn:
 
-✅ **CUÁNDO** refactorizar (señales de código problemático)  
-✅ **CÓMO** organizar (funciones → módulos → paquetes)  
-✅ **POR QUÉ** importa (mantenibilidad, escalabilidad, reutilización)  
-✅ **Principios** (DRY, SoC, SRP) con ejemplos prácticos  
+✅ **WHEN** to refactor (problematic code signals)  
+✅ **HOW** to organize (functions → modules → packages)  
+✅ **WHY** it matters (maintainability, scalability, reusability)  
+✅ **Principles** (DRY, SoC, SRP) with practical examples  
 
-Y lo mejor: con un ejemplo **real** (validación IBAN) que muestra por qué la complejidad justifica mejor organización.
+And the best part: with a **real** example (IBAN validation) showing why complexity justifies better organization.
 
 ---
 
-**Material completo y listo para enseñar** 🚀
+**Complete material ready to teach** 🚀

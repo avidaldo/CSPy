@@ -1,199 +1,199 @@
-# Índice Completo: Material de Arquitectura Progresiva
+# Full Index: Progressive Architecture Material
 
-## 📚 Documentación Principal
+## 📚 Main Documentation
 
-| Archivo | Propósito | Para Quién | Tiempo |
-|---------|-----------|------------|--------|
-| [README.md](README.md) | Visión general y guía de uso | Estudiantes | 10 min |
-| [TEACHING_GUIDE.md](TEACHING_GUIDE.md) | Guía pedagógica completa | Profesores | 30 min |
-| [VISUAL_SUMMARY.md](VISUAL_SUMMARY.md) | Resumen visual con diagramas | Estudiantes/Profesores | 15 min |
-| [QUICK_COMPARISON.md](QUICK_COMPARISON.md) | Tabla comparativa rápida | Estudiantes | 5 min |
-| [EXERCISES.md](EXERCISES.md) | Cuaderno de ejercicios | Estudiantes | 3-4 h |
-| **Este archivo** | Índice navegable | Todos | 2 min |
+| File | Purpose | Target Audience | Time |
+|------|---------|-----------------|------|
+| [README.md](README.md) | Overview and usage guide | Students | 10 min |
+| [TEACHING_GUIDE.md](TEACHING_GUIDE.md) | Complete pedagogical guide | Teachers | 30 min |
+| [VISUAL_SUMMARY.md](VISUAL_SUMMARY.md) | Visual summary with diagrams | Students/Teachers | 15 min |
+| [QUICK_COMPARISON.md](QUICK_COMPARISON.md) | Quick comparison table | Students | 5 min |
+| [EXERCISES.md](EXERCISES.md) | Exercises notebook | Students | 3-4 h |
+| **This file** | Navigable index | Everyone | 2 min |
 
-## 🎓 Material de Enseñanza
+## 🎓 Teaching Material
 
-### Notebooks Jupyter
+### Jupyter Notebooks
 
-| Notebook | Tema | Prerrequisito | Duración |
-|----------|------|---------------|----------|
-| [../04-oop_basics.ipynb](../04-oop_basics.ipynb) | POO: Clases y objetos | Funciones | 2 h |
-| [../modules/07_progressive_architecture.ipynb](../modules/07_progressive_architecture.ipynb) | Arquitectura progresiva | OOP | 2 h |
+| Notebook | Topic | Prerequisite | Duration |
+|----------|-------|--------------|----------|
+| [../04-oop_basics.ipynb](../04-oop_basics.ipynb) | OOP: Classes and objects | Functions | 2 h |
+| [../modules/07_progressive_architecture.ipynb](../modules/07_progressive_architecture.ipynb) | Progressive architecture | OOP | 2 h |
 
-### Código de Ejemplo (4 Versiones)
+### Example Code (4 Versions)
 
-| Versión | Archivos | Concepto Clave | Líneas |
-|---------|----------|----------------|--------|
-| [v1_monolithic/](v1_monolithic/) | `bank.py` | Todo en una clase | ~150 |
-| [v2_functional/](v2_functional/) | `bank.py` | Funciones separadas (SoC) | ~180 |
-| [v3_modular/](v3_modular/) | `bank.py`, `validators.py` | Módulos (DRY) | ~220 |
-| [v4_package/](v4_package/) | `bank.py`, `validators/` | Paquete (SRP) | ~250 |
+| Version | Files | Key Concept | Lines |
+|---------|-------|-------------|-------|
+| [v1_monolithic/](v1_monolithic/) | `bank.py` | All in one class | ~150 |
+| [v2_functional/](v2_functional/) | `bank.py` | Separate functions (SoC) | ~180 |
+| [v3_modular/](v3_modular/) | `bank.py`, `validators.py` | Modules (DRY) | ~220 |
+| [v4_package/](v4_package/) | `bank.py`, `validators/` | Package (SRP) | ~250 |
 
-## 🎯 Rutas de Aprendizaje
+## 🎯 Learning Paths
 
-### Para Estudiantes Nuevos
+### For New Students
 
 ```mermaid
 graph TD
     A[Notebook 04: OOP Basics] --> B[Notebook 07: Progressive Architecture]
-    B --> C[Leer README.md]
-    C --> D[Ejecutar v1 → v2 → v3 → v4]
-    D --> E[Hacer ejercicios EXERCISES.md]
-    E --> F[Aplicar en proyecto propio]
+    B --> C[Read README.md]
+    C --> D[Run v1 → v2 → v3 → v4]
+    D --> E[Do exercises EXERCISES.md]
+    E --> F[Apply in own project]
 ```
 
-**Pasos detallados:**
+**Detailed steps:**
 
-1. **Día 1: Fundamentos (2-3h)**
-   - [ ] Lee [../04-oop_basics.ipynb](../04-oop_basics.ipynb)
-   - [ ] Completa ejercicios del notebook OOP
-   - [ ] Verifica que entiendes: clases, objetos, métodos, `self`
+1. **Day 1: Fundamentals (2-3h)**
+   - [ ] Read [../04-oop_basics.ipynb](../04-oop_basics.ipynb)
+   - [ ] Complete exercises in OOP notebook
+   - [ ] Verify you understand: classes, objects, methods, `self`
 
-2. **Día 2: Arquitectura (2-3h)**
-   - [ ] Lee [../modules/07_progressive_architecture.ipynb](../modules/07_progressive_architecture.ipynb)
-   - [ ] Lee [README.md](README.md) de este directorio
-   - [ ] Lee [VISUAL_SUMMARY.md](VISUAL_SUMMARY.md)
+2. **Day 2: Architecture (2-3h)**
+   - [ ] Read [../modules/07_progressive_architecture.ipynb](../modules/07_progressive_architecture.ipynb)
+   - [ ] Read [README.md](README.md) in this directory
+   - [ ] Read [VISUAL_SUMMARY.md](VISUAL_SUMMARY.md)
 
-3. **Día 3: Práctica (2-3h)**
-   - [ ] Ejecuta cada versión: `python v1_monolithic/bank.py`, etc.
-   - [ ] Compara código entre versiones
-   - [ ] Usa [QUICK_COMPARISON.md](QUICK_COMPARISON.md) como referencia
+3. **Day 3: Practice (2-3h)**
+   - [ ] Run each version: `python v1_monolithic/bank.py`, etc.
+   - [ ] Compare code between versions
+   - [ ] Use [QUICK_COMPARISON.md](QUICK_COMPARISON.md) as reference
 
-4. **Día 4-5: Ejercicios (3-4h)**
-   - [ ] Completa [EXERCISES.md](EXERCISES.md)
-   - [ ] Empieza con ejercicio 1 (análisis)
-   - [ ] Progresa hasta ejercicio 6 (aplicación completa)
+4. **Day 4-5: Exercises (3-4h)**
+   - [ ] Complete [EXERCISES.md](EXERCISES.md)
+   - [ ] Start with exercise 1 (analysis)
+   - [ ] Progress up to exercise 6 (full application)
 
-5. **Día 6: Aplicación (variable)**
-   - [ ] Identifica un proyecto tuyo para refactorizar
-   - [ ] Aplica los principios aprendidos
-   - [ ] Documenta el proceso
+5. **Day 6: Application (variable)**
+   - [ ] Identify a project of yours to refactor
+   - [ ] Apply learned principles
+   - [ ] Document the process
 
-### Para Profesores
+### For Teachers
 
 ```mermaid
 graph TD
-    A[Leer TEACHING_GUIDE.md] --> B[Preparar sesión: Notebook 07]
-    B --> C[Sesión 1: OOP Review + v1]
-    C --> D[Sesión 2: v1 → v2 SoC]
-    D --> E[Sesión 3: v2 → v3 Módulos]
-    E --> F[Sesión 4: v3 → v4 Paquetes]
-    F --> G[Sesión 5: Ejercicios prácticos]
-    G --> H[Proyecto final]
+    A[Read TEACHING_GUIDE.md] --> B[Prepare session: Notebook 07]
+    B --> C[Session 1: OOP Review + v1]
+    C --> D[Session 2: v1 → v2 SoC]
+    D --> E[Session 3: v2 → v3 Modules]
+    E --> F[Session 4: v3 → v4 Packages]
+    F --> G[Session 5: Practical exercises]
+    G --> H[Final project]
 ```
 
-**Preparación:**
+**Preparation:**
 
-1. **Antes de clase (1h)**
-   - [ ] Lee [TEACHING_GUIDE.md](TEACHING_GUIDE.md) completo
-   - [ ] Revisa [../modules/07_progressive_architecture.ipynb](../modules/07_progressive_architecture.ipynb)
-   - [ ] Ejecuta todas las versiones para verificar que funcionan
+1. **Before class (1h)**
+   - [ ] Read [TEACHING_GUIDE.md](TEACHING_GUIDE.md) completely
+   - [ ] Review [../modules/07_progressive_architecture.ipynb](../modules/07_progressive_architecture.ipynb)
+   - [ ] Run all versions to verify they work
 
-2. **Plan de sesiones (5 sesiones de 2h)**
-   - Sesión 1: Introducción + v1
-   - Sesión 2: Principio SoC + v2
-   - Sesión 3: Módulos + MOD-97 + v3
-   - Sesión 4: Paquetes + SRP + v4
-   - Sesión 5: Ejercicios prácticos
+2. **Session Plan (5 sessions of 2h)**
+   - Session 1: Introduction + v1
+   - Session 2: SoC Principle + v2
+   - Session 3: Modules + MOD-97 + v3
+   - Session 4: Packages + SRP + v4
+   - Session 5: Practical exercises
 
-3. **Material de apoyo**
-   - Proyectar [VISUAL_SUMMARY.md](VISUAL_SUMMARY.md) en clase
-   - Distribuir [QUICK_COMPARISON.md](QUICK_COMPARISON.md) como referencia
-   - Asignar [EXERCISES.md](EXERCISES.md) como tarea
+3. **Support Material**
+   - Project [VISUAL_SUMMARY.md](VISUAL_SUMMARY.md) in class
+   - Distribute [QUICK_COMPARISON.md](QUICK_COMPARISON.md) as reference
+   - Assign [EXERCISES.md](EXERCISES.md) as homework
 
-### Para Revisión Rápida
+### For Quick Review
 
-**¿Necesitas recordar...?**
+**Need to remember...?**
 
-| Tema | Consulta |
-|------|----------|
-| Diferencias entre versiones | [QUICK_COMPARISON.md](QUICK_COMPARISON.md) |
-| Principios (DRY, SoC, SRP) | [VISUAL_SUMMARY.md](VISUAL_SUMMARY.md) |
-| Algoritmo MOD-97 | [v3_modular/validators.py](v3_modular/validators.py) líneas 30-50 |
-| Estructura de `__init__.py` | [v4_package/validators/__init__.py](v4_package/validators/__init__.py) |
-| Cuándo refactorizar | [QUICK_COMPARISON.md](QUICK_COMPARISON.md) sección "Señales" |
+| Topic | Check |
+|-------|-------|
+| Differences between versions | [QUICK_COMPARISON.md](QUICK_COMPARISON.md) |
+| Principles (DRY, SoC, SRP) | [VISUAL_SUMMARY.md](VISUAL_SUMMARY.md) |
+| MOD-97 Algorithm | [v3_modular/validators.py](v3_modular/validators.py) lines 30-50 |
+| `__init__.py` structure | [v4_package/validators/__init__.py](v4_package/validators/__init__.py) |
+| When to refactor | [QUICK_COMPARISON.md](QUICK_COMPARISON.md) section "Signals" |
 
-## 📁 Mapa del Proyecto
+## 📁 Project Map
 
 ```
 bank_evolution/
 │
-├── 📄 README.md                    ← Empieza aquí
-├── 📄 INDEX.md                     ← Este archivo
-├── 📘 TEACHING_GUIDE.md            ← Para profesores
-├── 📊 VISUAL_SUMMARY.md            ← Diagramas y resúmenes
-├── 📋 QUICK_COMPARISON.md          ← Referencia rápida
-├── 📝 EXERCISES.md                 ← Ejercicios prácticos
+├── 📄 README.md                    ← Start here
+├── 📄 INDEX.md                     ← This file
+├── 📘 TEACHING_GUIDE.md            ← For teachers
+├── 📊 VISUAL_SUMMARY.md            ← Diagrams and summaries
+├── 📋 QUICK_COMPARISON.md          ← Quick reference
+├── 📝 EXERCISES.md                 ← Practical exercises
 │
 ├── 📂 v1_monolithic/
-│   └── bank.py                     ← Todo en uno
+│   └── bank.py                     ← All in one
 │
 ├── 📂 v2_functional/
-│   └── bank.py                     ← Funciones separadas
+│   └── bank.py                     ← Separate functions
 │
 ├── 📂 v3_modular/
-│   ├── bank.py                     ← Clase principal
-│   └── validators.py               ← Módulo (con MOD-97)
+│   ├── bank.py                     ← Main class
+│   └── validators.py               ← Module (with MOD-97)
 │
 └── 📂 v4_package/
-    ├── bank.py                     ← Clase principal
-    └── validators/                 ← Paquete
-        ├── __init__.py             ← Exportaciones
-        ├── iban.py                 ← Validación IBAN
-        └── amount.py               ← Validación cantidades
+    ├── bank.py                     ← Main class
+    └── validators/                 ← Package
+        ├── __init__.py             ← Exports
+        ├── iban.py                 ← IBAN validation
+        └── amount.py               ← Amount validation
 ```
 
-## 🔍 Buscar por Concepto
+## 🔍 Search by Concept
 
-### Arquitectura
+### Architecture
 
-| Concepto | Dónde encontrarlo |
-|----------|-------------------|
-| Monolítico | [v1_monolithic/bank.py](v1_monolithic/bank.py) |
-| Funcional | [v2_functional/bank.py](v2_functional/bank.py) |
+| Concept | Where to find it |
+|---------|------------------|
+| Monolithic | [v1_monolithic/bank.py](v1_monolithic/bank.py) |
+| Functional | [v2_functional/bank.py](v2_functional/bank.py) |
 | Modular | [v3_modular/](v3_modular/) |
-| Paquete | [v4_package/](v4_package/) |
+| Package | [v4_package/](v4_package/) |
 
-### Principios
+### Principles
 
-| Principio | Explicación | Ejemplo |
+| Principle | Explanation | Example |
 |-----------|-------------|---------|
-| **DRY** | [VISUAL_SUMMARY.md](VISUAL_SUMMARY.md#principios) | v2 → v3 |
-| **SoC** | [VISUAL_SUMMARY.md](VISUAL_SUMMARY.md#principios) | v1 → v2 |
-| **SRP** | [VISUAL_SUMMARY.md](VISUAL_SUMMARY.md#principios) | v3 → v4 |
+| **DRY** | [VISUAL_SUMMARY.md](VISUAL_SUMMARY.md#principles) | v2 → v3 |
+| **SoC** | [VISUAL_SUMMARY.md](VISUAL_SUMMARY.md#principles) | v1 → v2 |
+| **SRP** | [VISUAL_SUMMARY.md](VISUAL_SUMMARY.md#principles) | v3 → v4 |
 
-### Validaciones
+### Validations
 
-| Tipo | Implementación |
+| Type | Implementation |
 |------|----------------|
-| Solo formato (regex) | v1, v2 |
-| Formato + checksum MOD-97 | v3, v4 |
-| Algoritmo MOD-97 explicado | [v3_modular/validators.py](v3_modular/validators.py) |
+| Format only (regex) | v1, v2 |
+| Format + MOD-97 checksum | v3, v4 |
+| MOD-97 algorithm explained | [v3_modular/validators.py](v3_modular/validators.py) |
 
-### Python Específico
+### Specific Python Concepts
 
-| Concepto Python | Dónde verlo |
-|-----------------|-------------|
-| Módulos (import) | v3 |
-| Paquetes (directorios) | v4 |
+| Python Concept | Where to see it |
+|----------------|-----------------|
+| Modules (import) | v3 |
+| Packages (directories) | v4 |
 | `__init__.py` | [v4_package/validators/__init__.py](v4_package/validators/__init__.py) |
 | `__all__` | [v4_package/validators/__init__.py](v4_package/validators/__init__.py) |
-| Properties (`@property`) | Todas las versiones |
-| Custom Exceptions | Todas las versiones |
+| Properties (`@property`) | All versions |
+| Custom Exceptions | All versions |
 
-## 🚀 Comandos Útiles
+## 🚀 Useful Commands
 
-### Ejecutar todas las versiones
+### Run all versions
 
 ```bash
-# Desde el directorio bank_evolution/
+# From bank_evolution/ directory
 python v1_monolithic/bank.py
 python v2_functional/bank.py
 python v3_modular/bank.py
 python v4_package/bank.py
 ```
 
-### Probar módulos independientemente
+### Test modules independently
 
 ```bash
 # v3
@@ -204,7 +204,7 @@ python -m v4_package.validators.iban
 python -m v4_package.validators.amount
 ```
 
-### Comparar archivos
+### Compare files
 
 ```bash
 # Linux/Mac
@@ -215,83 +215,83 @@ diff v3_modular/validators.py v4_package/validators/iban.py
 Compare-Object (Get-Content v1_monolithic/bank.py) (Get-Content v2_functional/bank.py)
 ```
 
-## 📊 Estadísticas del Material
+## 📊 Material Statistics
 
-| Métrica | Valor |
-|---------|-------|
-| Archivos de código Python | 9 |
-| Archivos de documentación | 6 |
-| Notebooks Jupyter | 2 |
-| Líneas de código total | ~800 |
-| Líneas de documentación | ~3000 |
-| Ejercicios prácticos | 7 |
-| Tiempo estimado aprendizaje | 10-15 horas |
-| Nivel | Intermedio |
+| Metric | Value |
+|--------|-------|
+| Python code files | 9 |
+| Documentation files | 6 |
+| Jupyter Notebooks | 2 |
+| Total lines of code | ~800 |
+| Documentation lines | ~3000 |
+| Practical exercises | 7 |
+| Estimated learning time | 10-15 hours |
+| Level | Intermediate |
 
-## 🎯 Objetivos de Aprendizaje
+## 🎯 Learning Objectives
 
-Al completar este material, serás capaz de:
+By completing this material, you will be able to:
 
-- [ ] Identificar código que necesita refactorización
-- [ ] Aplicar principios DRY, SoC y SRP
-- [ ] Organizar código en funciones, módulos y paquetes
-- [ ] Crear paquetes Python con `__init__.py`
-- [ ] Implementar validaciones complejas (IBAN MOD-97)
-- [ ] Decidir cuándo usar cada arquitectura (v1 vs v2 vs v3 vs v4)
-- [ ] Refactorizar código existente progresivamente
+- [ ] Identify code that needs refactoring
+- [ ] Apply DRY, SoC, and SRP principles
+- [ ] Organize code into functions, modules, and packages
+- [ ] Create Python packages with `__init__.py`
+- [ ] Implement complex validations (IBAN MOD-97)
+- [ ] Decide when to use each architecture (v1 vs v2 vs v3 vs v4)
+- [ ] Refactor existing code progressively
 
-## 💡 Consejos de Uso
+## 💡 Usage Tips
 
-### Para estudio individual
+### For individual study
 
-1. **No saltes pasos**: Cada versión construye sobre la anterior
-2. **Escribe el código**: No solo leas, implementa
-3. **Haz los ejercicios**: La práctica es esencial
-4. **Aplica a tus proyectos**: La mejor forma de aprender
+1. **Don't skip steps**: Each version builds on the previous one
+2. **Write the code**: Don't just read, implement
+3. **Do the exercises**: Practice is essential
+4. **Apply to your projects**: The best way to learn
 
-### Para clase
+### For class
 
-1. **Live coding**: Muestra la refactorización en vivo
-2. **Debates**: ¿Cuándo refactorizar? ¿Qué versión usar?
-3. **Proyectos en equipo**: Que refactoricen código real
-4. **Code reviews**: Revisen código de otros aplicando principios
+1. **Live coding**: Show refactoring live
+2. **Debates**: When to refactor? Which version to use?
+3. **Team projects**: Refactor real code
+4. **Code reviews**: Review others' code applying principles
 
-## 🔗 Enlaces Externos Útiles
+## 🔗 Useful External Links
 
 - [Python Modules Documentation](https://docs.python.org/3/tutorial/modules.html)
 - [IBAN Validation Algorithm](https://en.wikipedia.org/wiki/International_Bank_Account_Number#Validating_the_IBAN)
 - [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)
 - [Clean Code Book](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
 
-## ❓ Preguntas Frecuentes
+## ❓ FAQ
 
-**P: ¿Debo empezar siempre con v1?**
-R: Sí, para proyectos pequeños. Pero si ya sabes que será grande, empieza con v3.
+**Q: Should I always start with v1?**
+A: Yes, for small projects. But if you already know it will be large, start with v3.
 
-**P: ¿Es v4 siempre mejor?**
-R: No. Para scripts pequeños, v4 es sobre-ingeniería. Usa la versión apropiada.
+**Q: Is v4 always better?**
+A: No. For small scripts, v4 is over-engineering. Use the appropriate version.
 
-**P: ¿Cómo sé cuándo refactorizar?**
-R: Consulta [QUICK_COMPARISON.md](QUICK_COMPARISON.md) sección "Señales de que Necesitas Evolucionar".
+**Q: How do I know when to refactor?**
+A: Check [QUICK_COMPARISON.md](QUICK_COMPARISON.md) section "Signals you need to evolve".
 
-**P: ¿Funciona para otros lenguajes?**
-R: Los principios (DRY, SoC, SRP) son universales. La sintaxis cambia.
+**Q: Does it work for other languages?**
+A: The principles (DRY, SoC, SRP) are universal. Syntax changes.
 
-**P: ¿Qué pasa si mi código ya es v2?**
-R: Estudia v3 y v4 para ver cómo organizarlo mejor.
+**Q: What if my code is already v2?**
+A: Study v3 and v4 to see how to organize it better.
 
-## 📝 Feedback y Contribuciones
+## 📝 Feedback and Contributions
 
-Este material es didáctico. Si encuentras errores o mejoras:
+This material is educational. If you find errors or improvements:
 
-1. Abre un issue en el repositorio
-2. Propón cambios con ejemplos claros
-3. Sugiere ejercicios adicionales
+1. Open an issue in the repository
+2. Propose changes with clear examples
+3. Suggest additional exercises
 
 ---
 
-**Última actualización**: Diciembre 2025
-**Versión**: 1.0
-**Mantenedor**: Material didáctico CSPy
+**Last update**: December 2025
+**Version**: 1.0
+**Maintainer**: CSPy educational material
 
-**¡Feliz aprendizaje de arquitectura de software!** 🚀
+**Happy software architecture learning!** 🚀
