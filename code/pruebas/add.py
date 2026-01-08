@@ -1,4 +1,4 @@
-# modulo simple para sumar dos numeros
+# comentario mejor
 
 def misuma(a: int, b: int) -> int:
     '''Suma dos numeros y devuelve el resultado.'''
