@@ -1,6 +1,6 @@
 # IDEs (Integrated Development Environment)
 
-An IDE is a software application that combines a code editor with tools like build systems, debuggers, and version control to support the entire development workflow in one place. Modern IDEs for increasingly integrate AI assistance and notebook-style workflows, especially for languages like Python used in data science and machine learning.
+An IDE is a software application that combines a code editor with tools like build systems, debuggers, and version control to support the entire development workflow in one place. Modern IDEs increasingly integrate AI assistance and notebook-style workflows, especially for languages like Python used in data science and machine learning.
 
 ## Editors vs IDEs
 
@@ -62,6 +62,8 @@ Visual Studio Code (VS Code) has become [the dominant general‑purpose developm
 VS Code is a free, cross‑platform editor from Microsoft that can be turned into a full Python IDE via the official Python extension and related tools like Pylance. The Python extension adds environment selection, an integrated REPL, debugging, testing support, notebook integration, linting, and refactoring tools, making VS Code a solid choice for both introductory and professional Python work.
 
 VS Code also has strong support for remote development: you can open folders over SSH, inside containers, or in WSL while still using your local VS Code UI. This is particularly useful when working with GPUs or larger servers that are not available on a laptop.
+
+For a practical, classroom-oriented guide (settings, Git UI, and Copilot basics), see [vscode_basics.md](vscode_basics.md).
 
 ### [GitHub Codespaces](https://github.com/features/codespaces)
 

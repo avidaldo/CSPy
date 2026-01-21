@@ -1,6 +1,29 @@
-# Python Environments and Syntax
+# CSPy: Python Basics and Tooling
 
-- [IDEs.md](IDEs.md)
-- [Git and GitHub: Basic workflow](git_github_basics.md) 
-- [Basic Syntax](basic_syntax.ipynb)
-- [Functions in Python](functions.ipynb)
+## Getting oriented
+
+- [VS Code Basics (settings, Git UI, Copilot, prompting)](vscode_basics.md)
+- [IDEs and notebook environments](IDEs.md)
+- [Git and GitHub: basic workflow](git/git_github_basics.md)
+- [Agent instructions for this folder](AGENTS.md)
+
+## Python basics
+
+- [01: Basic syntax](basic-python/01-basic_syntax.ipynb)
+- [02: Program structure and debugging](basic-python/02-program_structure_and_debugging.ipynb)
+- [03: Functions](basic-python/03-functions.ipynb)
+- [04: OOP basics](basic-python/04-oop_basics.ipynb)
+
+## Python typing
+
+- [Python typing](python_typing.ipynb)
+
+## Modules
+
+- [01: Introduction to modules](modules/01_introduction_to_modules.ipynb)
+- [02: Importing strategies](modules/02_importing_strategies.ipynb)
+- [03: Standard library modules](modules/03_standard_library_modules.ipynb)
+- [04: Creating your own modules](modules/04_creating_your_own_modules.ipynb)
+- [05: Packages and structure](modules/05_packages_and_structure.ipynb)
+- [06: Real-world data analysis](modules/06_real_world_data_analysis.ipynb)
+- [07: Progressive architecture](modules/07_progressive_architecture.ipynb)
