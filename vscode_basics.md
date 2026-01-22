@@ -100,7 +100,6 @@ VS Code has a Git UI that covers 90% of the daily workflow.
 - Stage a file: click **+** next to it
 - Stage everything: click **+** next to “Changes”
 - Discard changes: click the rollback icon (be careful)
-- Create/switch branch: click the branch name in the status bar
 
 When you’re confused, use the terminal equivalents (`git status`, `git diff`, `git log`) to understand what’s happening.
 

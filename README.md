@@ -15,6 +15,10 @@
 - [03: Functions](basic-python/03-functions.ipynb)
 - [04: OOP basics](basic-python/04-oop_basics.ipynb)
 
+## Software Engineering Principles
+
+- [Basic concepts (SoC, SRP, Cohesion, Coupling)](software_engineering_basics.md)
+
 ## Python typing
 
 - [Python typing](python_typing.ipynb)
