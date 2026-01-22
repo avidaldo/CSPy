@@ -47,7 +47,7 @@ For data science and AI, notebook interfaces are a de‑facto standard because t
 
 ### [Jupyter Notebook & JupyterLab](https://jupyter.org/)
 
-Jupyter Notebook and its more modern interface, JupyterLab, are open‑source web applications for working with notebooks, code, and data. JupyterLab is now the recommended interface, but it's common to use other IDEs that integrate Jupyter support.
+Jupyter Notebook and its more modern interface, JupyterLab, are open‑source web applications for working with notebooks, code, and data. JupyterLab is now the recommended interface, but it's common to use other IDEs that integrate Jupyter support. For a more detailed look at how they work under the hood, see [Jupyter Notebook Basics](jupyter_basics.md).
 
 ### [Google Colab](https://colab.google)
 

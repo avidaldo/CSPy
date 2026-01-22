@@ -149,15 +149,19 @@ If your Copilot setup offers multiple models, you’ll typically see a **model p
 
 If you don’t see a model picker, your plan (or organization policy) may be restricting model choice.
 
-## 6) Using an `AGENTS.md` file
+## 6) Using AI Instruction Files
 
-An `AGENTS.md` file is a simple way to tell an AI assistant:
+Instruction files are a way to customize how AI assistants behave in your project. They tell the assistant about:
 
 - the goals of the repo (teaching vs production)
-- coding standards
+- coding standards and style preferences
 - what “done” means
+- libraries to prefer or avoid
 
-A good `AGENTS.md` is short and specific.
+### File locations
+
+- **`.github/copilot-instructions.md`**: The official location automatically read by GitHub Copilot.
+- **`AGENTS.md`** or **`instructions.md`**: Common conventions for storing instructions that you can manually add to context when needed.
 
 ### Example template
 
