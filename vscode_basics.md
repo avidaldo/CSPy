@@ -13,8 +13,8 @@ Tip: if you open a random file without opening the folder, many features (Git, t
 
 VS Code settings exist at two main scopes:
 
-- **User settings**: apply to all projects on your machine.
-- **Workspace settings**: apply only to the current folder/repo (good for class repos).
+- **User settings**: apply to all projects on your machine. Stored in your user profile.
+- **Workspace settings**: apply only to the current folder/repo (good for class repos). Stored in `.vscode/settings.json` inside the project.
 
 ### Open the Settings UI
 
@@ -22,10 +22,42 @@ VS Code settings exist at two main scopes:
 
 ### Edit `settings.json`
 
-Sometimes it’s better to use the JSON form so settings are explicit and easy to share.
+All VS Code settings are stored as **JSON files**. This makes them:
+
+- **Explicit**: you see exactly what's configured
+- **Shareable**: you can copy settings between machines or commit them to Git
+- **Versionable**: track changes over time
 
 - Open Command Palette: `Ctrl+Shift+P`
 - Run: **Preferences: Open User Settings (JSON)** or **Preferences: Open Workspace Settings (JSON)**
+
+### Sharing settings with your team
+
+**Workspace settings** (`.vscode/settings.json`) are ideal for sharing project-specific configuration:
+
+```json
+{
+  "editor.formatOnSave": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "files.exclude": { "**/__pycache__": true }
+}
+```
+
+These settings travel with the repository, so everyone on the team uses the same configuration.
+
+**Should you commit `.vscode/`?**
+
+- ✅ **Commit** `settings.json`: formatter, linter, and language settings benefit the whole team.
+- ⚠️ **Consider ignoring** `launch.json`: debug configurations often contain personal paths.
+- ⚠️ **Consider ignoring** `extensions.json`: recommended extensions (commit if you want to suggest extensions to teammates).
+
+A common `.gitignore` pattern:
+```gitignore
+# Keep shared settings, ignore personal debug configs
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+```
 
 Common classroom-friendly settings:
 
@@ -152,7 +184,7 @@ Examples:
 - “Update the navigation in `CSPy/CSPy/README.md` so all links resolve from that folder. Keep it a short bullet list.”
 - “Create a new notebook introducing Python functions. Use small cells, show outputs, and add markdown explanations between steps.”
 
-## 8) “Vibe coding” (and how to keep it safe)
+## 8) "Vibe coding" (and how to keep it safe)
 
 “Vibe coding” usually means: iterate quickly with AI suggestions, then refine.
 

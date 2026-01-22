@@ -4,6 +4,7 @@
 
 - [VS Code Basics (settings, Git UI, Copilot, prompting)](vscode_basics.md)
 - [IDEs and notebook environments](IDEs.md)
+- [Compilers vs Interpreters (and the Python case)](compilers_interpreters.md)
 - [Git and GitHub: basic workflow](git/git_github_basics.md)
 - [Agent instructions for this folder](AGENTS.md)
 

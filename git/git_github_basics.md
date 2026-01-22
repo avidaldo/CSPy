@@ -121,7 +121,32 @@ git clone https://github.com/YOUR_USERNAME/my-project.git
 
 ---
 
-## 8. The Daily Workflow: Syncing
+## 8. Fetch vs Pull: Understanding the Difference
+
+Before diving into the daily workflow, it's important to understand two related but different commands:
+
+- **`git fetch`**: Downloads changes from the remote repository but does **not** merge them into your local branch. It updates your local knowledge of what's on the remote (stored in `origin/main` or `origin/master`), letting you inspect changes before integrating them.
+- **`git pull`**: Does a `fetch` **plus** automatically merges the remote changes into your current branch. It's essentially `git fetch` + `git merge` in one step.
+
+### When to use each?
+
+| Command | Use when... |
+|---------|-------------|
+| `git fetch` | You want to see what changed remotely before merging (safer, more control) |
+| `git pull` | You trust the remote changes and want to integrate them immediately |
+
+**Example workflow with fetch:**
+```bash
+git fetch origin           # Download remote changes (no merge yet)
+git log HEAD..origin/main  # See what commits are new on the remote
+git merge origin/main      # Merge when ready
+```
+
+For beginners, `git pull` is usually fine. As you gain experience, `git fetch` gives you more control.
+
+---
+
+## 9. The Daily Workflow: Syncing
 
 To avoid conflicts and losing work, follow this strict routine:
 
@@ -170,6 +195,56 @@ Save your changes locally and upload them to the cloud before leaving.
 3. **Write descriptive commit messages**: "Fix bug in calculate_average function" is better than "fix stuff"
 4. **Push regularly**: Don't wait too long—push at the end of each work session
 5. **Don't commit sensitive data**: Never push passwords, API keys, or personal information
+
+---
+
+## The `.gitignore` File
+
+Not everything in your project folder should be tracked by Git. The `.gitignore` file tells Git which files and folders to **ignore**.
+
+### Why ignore files?
+
+- **Generated files**: Compiled code, build outputs (`__pycache__/`, `node_modules/`, `.exe`)
+- **Sensitive data**: Passwords, API keys, personal configuration
+- **Large files**: Datasets, videos, binaries that don't belong in version control
+- **OS/Editor files**: `.DS_Store` (macOS), `Thumbs.db` (Windows), `.idea/` (JetBrains)
+
+### Creating a `.gitignore`
+
+Create a file named `.gitignore` in your repository root:
+
+```gitignore
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# IDE settings (optional - see note below)
+.idea/
+
+# Sensitive files
+.env
+secrets.json
+
+# OS files
+.DS_Store
+Thumbs.db
+```
+
+**Note**: Lines starting with `#` are comments. Patterns can use wildcards (`*`) and folder markers (`/`).
+
+### Should you ignore `.vscode/`?
+
+It depends on your team:
+
+- **Commit `.vscode/settings.json`**: Share project-specific settings (formatters, linters) with your team.
+- **Ignore `.vscode/launch.json`**: Personal debug configurations often don't apply to others.
+- **Common approach**: Commit settings, ignore personal configs.
+
+### Useful resources
+
+- [gitignore.io](https://www.toptal.com/developers/gitignore): Generate `.gitignore` files for your stack
+- [GitHub's gitignore templates](https://github.com/github/gitignore): Ready-made templates for many languages
 
 ## Useful Links
 - [Official GitHub Documentation](https://docs.github.com/en/get-started)
