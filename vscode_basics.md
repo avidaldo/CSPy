@@ -124,18 +124,20 @@ Copilot can help in two main ways:
 
 Use inline suggestions for small, local edits (one function, a few lines).
 
-### Chat / Edit / Agent modes (how to choose)
+### Chat / Edit / Plan / Agent modes (how to choose)
 
 VS Code versions differ, but the idea is consistent:
 
 - **Chat**: ask questions, get explanations, explore options
 - **Edit**: apply changes to selected files / areas with supervision
+- **Plan**: analyze the codebase to propose a multi-file strategy without immediately applying edits
 - **Agent**: ask for multi-step, multi-file work (planning + implementation)
 
 Rule of thumb:
 
 - Use **Chat** to clarify requirements and edge cases.
 - Use **Edit** when you already know *what* to change.
+- Use **Plan** to get a high-level roadmap for a feature before writing code.
 - Use **Agent** when you want a small “mini project” done end-to-end.
 
 ### Selecting a model
