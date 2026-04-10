@@ -33,3 +33,9 @@
 - [05: Packages and structure](modules/05_packages_and_structure.ipynb)
 - [06: Real-world data analysis](modules/06_real_world_data_analysis.ipynb)
 - [07: Progressive architecture](modules/07_progressive_architecture.ipynb)
+
+
+## [Project: Hockey Stats](https://github.com/avidaldo/hockey-stats)
+> Project including notes on software development workflows, deployment, and more.
+
+
