@@ -19,6 +19,7 @@
 ## Software Engineering Principles
 
 - [Basic concepts (SoC, SRP, Cohesion, Coupling)](software_engineering_basics.md)
+- [Spec-Driven Development and VS Code Workflow](sdd_basics.md)
 
 ## Python typing
 
