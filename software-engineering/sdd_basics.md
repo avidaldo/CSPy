@@ -62,6 +62,8 @@ A standard SDD iteration follows these phases:
 4.  **Demo and Verify**: Show the software to the stakeholder. Walk through each acceptance criterion to prove it works.
 5.  **Update the Spec**: Use the feedback to update the requirements, close open questions, and start the next iteration.
 
+In practice, each SDD iteration maps naturally to a GitHub workflow: an **Issue** captures the requirement, a **branch** isolates the work, a **Pull Request** presents it for review, and a **merge** delivers it. See [GitHub Collaborative Workflows](../git/github_workflows.md) for details.
+
 ## 4. Why SDD and AI Agents Are a Natural Fit
 
 AI assistants like GitHub Copilot are powerful, but they have a fundamental limitation: **they do not know what you want to build unless you tell them**. SDD solves this perfectly.

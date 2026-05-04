@@ -8,6 +8,7 @@
 - [Virtual environments (pip, venv, uv, conda) and Docker](virtual_environments.md)
 - [Compilers vs Interpreters (and the Python case)](compilers_interpreters.md)
 - [Git and GitHub: basic workflow](git/git_github_basics.md)
+- [GitHub collaborative workflows (forks, PRs, code review)](git/github_workflows.md)
 
 ## Python basics
 
@@ -18,8 +19,8 @@
 
 ## Software Engineering Principles
 
-- [Basic concepts (SoC, SRP, Cohesion, Coupling)](software_engineering_basics.md)
-- [Spec-Driven Development and VS Code Workflow](sdd_basics.md)
+- [Basic concepts (SoC, SRP, Cohesion, Coupling)](software-engineering/software_engineering_basics.md)
+- [Spec-Driven Development and VS Code Workflow](software-engineering/sdd_basics.md)
 
 ## Python typing
 

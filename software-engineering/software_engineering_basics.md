@@ -1,6 +1,6 @@
 # Basic Software Engineering Concepts
 
-When developing applications like our [Bank Example](code/code-examples/bank/), writing code that "just works" is often not enough. As projects grow, we need to organize code so it satisfies three key quality attributes:
+When developing applications like our [Bank Example](../code/code-examples/bank/), writing code that "just works" is often not enough. As projects grow, we need to organize code so it satisfies three key quality attributes:
 
 1.  **Maintainability**: How easy it is to fix bugs, update libraries, or modify existing features without breaking other parts of the system.
 2.  **Readability**: How easily a human developer (including "future you") can understand the code's intent. Code is read much more often than it is written.
